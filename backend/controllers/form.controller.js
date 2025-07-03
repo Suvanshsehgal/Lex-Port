@@ -3,7 +3,9 @@ import { LegalDocument } from "../models/form.models.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
-import { uploadImage } from "../utils/cloudinary.js";
+import { uploadImage, uploadFileToCloudinary } from "../utils/cloudinary.js";
+import { generatePDFLocally } from "../utils/puppeteerHelper.js";
+import fs from "fs";
 
 export const submitDocument = asyncHandler(async (req, res) => {
   console.log("📨 New document submission received:", JSON.stringify(req.body, null, 2));
@@ -37,24 +39,47 @@ export const submitDocument = asyncHandler(async (req, res) => {
     req.body.SignatureSection.SignatureImage = uploaded.url;
   }
 
-  // ✅ Use appropriate model based on DocumentType
+  // ✅ Choose document model
   let documentModel;
-
   switch (DocumentType) {
     case "RentAgreement":
       documentModel = RentAgreement;
       break;
-    
+
     default:
       throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);
   }
 
-  // ✅ Create the document
+  // ✅ Save form data to database
   const document = await documentModel.create(req.body);
 
+  // ✅ Generate PDF locally using Puppeteer
+  const pdfPath = await generatePDFLocally(document.toObject());
+
+  // ✅ Upload the PDF to Cloudinary
+  const cloudinaryResult = await uploadFileToCloudinary(pdfPath, "documents");
+
+  if (!cloudinaryResult?.url) {
+    throw new ApiError(500, "Failed to upload PDF to Cloudinary");
+  }
+
+  // ✅ Delete local file after upload
+  if (fs.existsSync(pdfPath)) {
+  fs.unlinkSync(pdfPath);
+} else {
+  console.warn("⚠️ Tried to delete a non-existent file:", pdfPath);
+}
+
+  // ✅ Optionally store the PDF URL in DB
+  document.pdfUrl = cloudinaryResult.url;
+  await document.save();
+
+  // ✅ Send response
   return res
     .status(201)
-    .json(new ApiResponse(201, document, `${DocumentType} submitted successfully.`));
+    .json(
+      new ApiResponse(201, { document, pdfUrl: cloudinaryResult.url }, `${DocumentType} submitted and PDF uploaded successfully.`)
+    );
 });
 
 export default submitDocument;

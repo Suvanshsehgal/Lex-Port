@@ -1,7 +1,7 @@
-import {v2 as cloudinary} from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import dotenv from 'dotenv';
-dotenv.config();
 import fs from 'fs';
+dotenv.config();
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,22 +9,54 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+// 🖼️ For uploading images (signatures etc.)
 const uploadImage = async (filePath) => {
     try {
-        if (!filePath) {
-            return null
+        if (!filePath) return null;
+
+        const response = await cloudinary.uploader.upload(filePath, {
+            resource_type: 'auto',
+            folder: 'signatures',
+        });
+
+        // ✅ Delete file only if it exists
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
         }
-        const response = await cloudinary.uploader.upload(filePath,
-            {
-                resource_type: 'auto',
-            })
-        // console.log('Image uploaded successfully' , response.url);
-        // fs.unlinkSync(filePath); // Remove the locally saved temporary file
+
         return response;
     } catch (error) {
-        fs.unlinkSync(filePath);//remove the locally safe temporary file
-        console.error('Error uploading image to Cloudinary:', error);
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+        console.error('❌ Error uploading image to Cloudinary:', error);
         return null;
     }
-}
-export {uploadImage};
+};
+
+// 📄 For uploading PDFs
+const uploadFileToCloudinary = async (filePath, folderName = 'documents') => {
+    try {
+        if (!filePath) return null;
+
+        const response = await cloudinary.uploader.upload(filePath, {
+            resource_type: 'raw',
+            folder: folderName,
+        });
+
+        // ✅ Delete file only if it exists
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+
+        return response;
+    } catch (error) {
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+        console.error('❌ Error uploading file to Cloudinary:', error);
+        return null;
+    }
+};
+
+export { uploadImage, uploadFileToCloudinary };
