@@ -1,3 +1,4 @@
+import { RentAgreement } from "../models/rentAgreement.js";
 import { LegalDocument } from "../models/form.models.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
@@ -5,35 +6,55 @@ import ApiError from "../utils/ApiError.js";
 import { uploadImage } from "../utils/cloudinary.js";
 
 export const submitDocument = asyncHandler(async (req, res) => {
-  console.log(" New document submission received:", JSON.stringify(req.body, null, 2));
+  console.log("📨 New document submission received:", JSON.stringify(req.body, null, 2));
 
-  // Parse SignatureSection if it's sent as a string (from frontend or Postman)
-  if (req.body.SignatureSection && typeof req.body.SignatureSection === "string") {
-    req.body.SignatureSection = JSON.parse(req.body.SignatureSection);
+  const { DocumentType } = req.body;
+
+  if (!DocumentType) {
+    throw new ApiError(400, "DocumentType is required.");
   }
 
-  // Initialize SignatureSection if it doesn't exist
+  // ✅ Parse SignatureSection if sent as string
+  if (req.body.SignatureSection && typeof req.body.SignatureSection === "string") {
+    try {
+      req.body.SignatureSection = JSON.parse(req.body.SignatureSection);
+    } catch (err) {
+      throw new ApiError(400, "Invalid JSON in SignatureSection.");
+    }
+  }
+
+  // ✅ Initialize SignatureSection if missing
   if (!req.body.SignatureSection) {
     req.body.SignatureSection = {};
   }
 
-  // If signature image is provided, upload it
+  // ✅ Handle signature image upload
   if (req.file) {
     const uploaded = await uploadImage(req.file.path);
     if (!uploaded?.url) {
       throw new ApiError(500, "Failed to upload signature image");
     }
-
-    // Add the image URL to SignatureSection
     req.body.SignatureSection.SignatureImage = uploaded.url;
   }
 
-  // ✅ Create the document with or without image
-  const document = await LegalDocument.create(req.body);
+  // ✅ Use appropriate model based on DocumentType
+  let documentModel;
+
+  switch (DocumentType) {
+    case "RentAgreement":
+      documentModel = RentAgreement;
+      break;
+    
+    default:
+      throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);
+  }
+
+  // ✅ Create the document
+  const document = await documentModel.create(req.body);
 
   return res
     .status(201)
-    .json(new ApiResponse(201, document, "Document submitted successfully."));
+    .json(new ApiResponse(201, document, `${DocumentType} submitted successfully.`));
 });
 
 export default submitDocument;
