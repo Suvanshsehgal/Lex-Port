@@ -11,7 +11,7 @@ function Login() {
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await API.post("/register", { email, password });
+    const response = await API.post("/login", { email, password });
     console.log("Login success:", response.data);
     alert(response.data.message);
 
