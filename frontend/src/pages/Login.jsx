@@ -2,15 +2,26 @@ import React, { useState } from "react";
 import GoogleLogo from "../assets/GoogleLogo.png";
 import Logo from "../assets/logo2.png";
 import LoginImage from "../assets/Login.png";
+import API from "../api";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login attempt:", { email, password });
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await API.post("/register", { email, password });
+    console.log("Login success:", response.data);
+    alert(response.data.message);
+
+    // Store token if needed
+    localStorage.setItem("token", response.data.token);
+  } catch (err) {
+    console.error("Login failed:", err.response?.data?.message || err.message);
+    alert(err.response?.data?.message || "Login failed");
+  }
+};
 
   const handleGoogleSignIn = () => {
     console.log("Google sign-in clicked");
