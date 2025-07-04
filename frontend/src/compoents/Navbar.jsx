@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
   return (
     <nav className="bg-[#FAF9F6] shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10">
-        <div className="flex justify-between items-center h-20 lg:h-24 py-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 py-2">
           {/* Logo */}
           <NavLink to="/" className="hover:opacity-80 transition-opacity">
             <img 
@@ -32,7 +32,7 @@ function Navbar() {
             </NavLink>
 
             <NavLink
-              to="/services"
+              to="/about"
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
@@ -41,11 +41,11 @@ function Navbar() {
                 }`
               }
             >
-              Services
+            About
             </NavLink>
 
             <NavLink
-              to="/about"
+              to="/consult"
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
@@ -54,11 +54,11 @@ function Navbar() {
                 }`
               }
             >
-              About
+              Consult
             </NavLink>
 
             <NavLink
-              to="/contact"
+              to="/profile"
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
@@ -67,7 +67,7 @@ function Navbar() {
                 }`
               }
             >
-              Contact
+              Profile
             </NavLink>
           </div>
 
