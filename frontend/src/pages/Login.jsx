@@ -103,15 +103,12 @@ function Login() {
                 </button>
 
                 {/* Divider */}
-                <div className="relative my-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-white/30"></div>
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-transparent text-white/70">
-                      or
-                    </span>
-                  </div>
+                <div className="flex items-center my-6">
+                  <div className="flex-grow border-t border-white/30"></div>
+                  <span className="mx-4 text-white/60 text-sm font-medium">
+                    or
+                  </span>
+                  <div className="flex-grow border-t border-white/30"></div>
                 </div>
 
                 {/* Google Sign In button */}
