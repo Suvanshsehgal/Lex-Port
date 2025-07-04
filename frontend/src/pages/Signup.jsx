@@ -8,22 +8,39 @@ function Signup() {
   const [username, setUsername] = useState(""); // New state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSucessMessage] = useState("");
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await API.post("/register", {
-      Username: username, // assuming your backend uses "name"
-      email,
-      password,
-    });
-    alert(res.data.message); // show success message
-    console.log("Signup successful:", res.data);
-  } catch (err) {
-    alert(err.response?.data?.message || "Signup failed");
-    console.error("Signup error:", err);
-  }
-};
+    e.preventDefault();
+    setErrorMessage("");
+    setSucessMessage("");
+    try {
+      const res = await API.post("/register", {
+        Username: username, // assuming your backend uses "name"
+        email,
+        password,
+      });
+      setSucessMessage(res.data.message);
+      console.log("Signup successful:", res.data);
+    } catch (err) {
+      const code = err.response?.data?.code;
+
+      // ✅ Set custom error messages based on code
+      switch (code) {
+        case "USER_EXISTS":
+          setErrorMessage("User already exists with this email or username.");
+          break;
+        case "MISSING_FIELDS":
+          setErrorMessage("Please fill all fields.");
+          break;
+        default:
+          setErrorMessage("An unexpected error occurred.");
+      }
+
+      console.error("Signup error:", err);
+    }
+  };
 
   const handleGoogleSignIn = () => {
     console.log("Google sign-in clicked");
@@ -78,6 +95,17 @@ function Signup() {
               </h3>
 
               <div className="space-y-6">
+                {errorMessage && (
+                  <div className="bg-red-500/20 border border-red-400 text-red-300 text-sm rounded-lg px-4 py-2 backdrop-blur-sm transition-opacity duration-300">
+                    {errorMessage}
+                  </div>
+                )}
+                {successMessage && (
+                  <div className="bg-green-500/20 border border-green-400 text-green-300 text-sm rounded-lg px-4 py-2 backdrop-blur-sm transition-opacity duration-300">
+                    {successMessage}
+                  </div>
+                )}
+
                 {/* Username field */}
                 <div>
                   <label className="block text-white text-sm font-medium mb-2">

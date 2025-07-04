@@ -4,6 +4,7 @@ import userRoutes from './routes/user.routes.js';
 import cors from 'cors';
 import  submitDocument  from './routes/form.routes.js';
 import bodyParser from 'body-parser';
+import errorMiddleware from './middlewares/error.middleware.js';
 dotenv.config();
 
 const app = express();
@@ -18,4 +19,6 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/user",submitDocument);
+
+app.use(errorMiddleware);
 export { app };

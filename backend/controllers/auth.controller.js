@@ -18,7 +18,7 @@ const registeruser = asyncHandler(async (req, res) => {
   });
 
   if (existingUser) {
-    throw new ApiError(409, "User already exists");
+    throw new ApiError(409, "User already exists",[] , "" ,"USER_EXISTS");
   }
 
   const user = await User.create({ Username, email, password });
@@ -26,7 +26,7 @@ const registeruser = asyncHandler(async (req, res) => {
   const createdUser = await User.findById(user._id).select("-password");
 
   if (!createdUser) {
-    throw new ApiError(500, "User creation failed");
+    throw new ApiError(500, "User creation failed" ,[], "" , USER_CREATION_FAILED) ;
   }
 
   return res
@@ -38,17 +38,17 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new ApiError(400, "Please provide email and password");
+    throw new ApiError(400, "Please provide email and password" , [], "", "MISSING_FIELDS");
   }
 
   const user = await User.findOne({ email });
   if (!user) {
-    throw new ApiError(404, "User not found");
+    throw new ApiError(404, "User not found",[], "", "EMAIL_NOT_FOUND");
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    throw new ApiError(401, "Invalid password");
+    throw new ApiError(401, "Invalid password", [], "", "INVALID_PASSWORD");
   }
 
   const token = jwt.sign(
