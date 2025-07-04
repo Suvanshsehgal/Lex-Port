@@ -3,6 +3,7 @@ import GoogleLogo from "../assets/GoogleLogo.png";
 import Logo from "../assets/logo2.png";
 import LoginImage from "../assets/Login.png";
 import API from "../api";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [username, setUsername] = useState(""); // New state
@@ -10,6 +11,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSucessMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,10 @@ function Signup() {
       });
       setSucessMessage(res.data.message);
       console.log("Signup successful:", res.data);
+
+       setTimeout(() => {
+      navigate("/home");
+    }, 2000);
     } catch (err) {
       const code = err.response?.data?.code;
 

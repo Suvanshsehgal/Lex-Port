@@ -6,6 +6,9 @@ import Startng from './Startng.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import LegalLandingPage from './pages/LandingPage.jsx'
+import Home from './pages/Home.jsx'
+import Profile from './pages/Profile.jsx'
+import Consult from './pages/Consult.jsx'
 import App from './App.jsx'
 
 const router = createBrowserRouter([
@@ -24,6 +27,18 @@ const router = createBrowserRouter([
       {
         path:'signup',
         element:<Signup/>
+      },
+      {
+        path:'home',
+        element:<Home/>
+      },
+      {
+        path:'profile',
+        element:<Profile/>
+      },
+      {
+        path:'consult',
+        element:<Consult/>
       }
     ]
   }
