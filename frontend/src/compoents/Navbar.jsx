@@ -1,7 +1,7 @@
-import React from 'react';
-import logo from '../assets/logo.png';
-import { NavLink } from 'react-router-dom';
-import {Link} from 'react-scroll'
+import React from "react";
+import logo from "../assets/logo.png";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-scroll";
 function Navbar() {
   return (
     <nav className="bg-[#FAF9F6] shadow-sm sticky top-0 z-50">
@@ -9,9 +9,9 @@ function Navbar() {
         <div className="flex justify-between items-center h-16 py-2">
           {/* Logo */}
           <NavLink to="/" className="hover:opacity-80 transition-opacity">
-            <img 
-              src={logo} 
-              alt="Lex-Port Logo" 
+            <img
+              src={logo}
+              alt="Lex-Port Logo"
               className="h-10 w-auto object-contain"
             />
           </NavLink>
@@ -23,8 +23,8 @@ function Navbar() {
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
-                    ? 'text-[#1e463c] underline underline-offset-4'
-                    : 'text-[#1e463c] hover:text-[#16382f]'
+                    ? "text-[#1e463c] underline underline-offset-4"
+                    : "text-[#1e463c] hover:text-[#16382f]"
                 }`
               }
             >
@@ -32,22 +32,22 @@ function Navbar() {
             </NavLink>
 
             <Link
-  to="about-section"
-  smooth={true}
-  duration={500}
-  offset={-70} // adjust if you have a fixed navbar
-  className="px-3 py-2 text-base font-medium transition-colors text-[#1e463c] hover:text-[#16382f] cursor-pointer"
->
-  About
-</Link>
+              to="about-section"
+              smooth={true}
+              duration={500}
+              offset={-70} // adjust if you have a fixed navbar
+              className="px-3 py-2 text-base font-medium transition-colors text-[#1e463c] hover:text-[#16382f] cursor-pointer"
+            >
+              About
+            </Link>
 
             <NavLink
               to="/consult"
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
-                    ? 'text-[#1etext-lg463c] underline underline-offset-4'
-                    : 'text-[#1e463c] hover:text-[#16382f]'
+                    ? "text-[#1etext-lg463c] underline underline-offset-4"
+                    : "text-[#1e463c] hover:text-[#16382f]"
                 }`
               }
             >
@@ -59,8 +59,8 @@ function Navbar() {
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
-                    ? 'text-[#1e463c] underline underline-offset-4'
-                    : 'text-[#1e463c] hover:text-[#16382f]'
+                    ? "text-[#1e463c] underline underline-offset-4"
+                    : "text-[#1e463c] hover:text-[#16382f]"
                 }`
               }
             >
