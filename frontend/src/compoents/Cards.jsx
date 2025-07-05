@@ -5,12 +5,14 @@ const Cards = ({ data }) => {
     console.log(`Learn more about ${title}`);
   };
 
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center px-6 py-10 max-w-7xl mx-auto">
-      {data.map((card) => (
+      {data.map((card,index) => (
         <div
           key={card.id}
-          className="bg-[#FAF9F6] rounded-2xl shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
+          id={`card-${index + 1}`}
+          className="scroll-mt-24 bg-[#FAF9F6] rounded-2xl shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
         >
           {/* Header with Icon and Title */}
           <div className="flex items-center mb-4">

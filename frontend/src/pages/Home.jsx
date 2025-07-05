@@ -25,28 +25,28 @@ function Home() {
         "A simple lease agreement between landlord and tenant — fully customizable for duration, rent, and terms.",
     },
     {
-      id: 1,
+      id: 2,
       image: NDAIcon,
       title: "Non-Disclosure Agreement (NDA)",
       description:
         "Protect your sensitive information with an NDA. Ideal for business deals, freelance work, or startup discussions.",
     },
     {
-      id: 1,
+      id: 3,
       image: FreelanceIcon,
       title: "Freelance Agreement",
       description:
         "A legally binding contract between a freelancer and client outlining services, deadlines, and payment terms.",
     },
     {
-      id: 1,
+      id:4,
       image: PartnerIcon,
       title: "Partnership Agreement",
       description:
         "Outline terms between partners, including equity, responsibilities, and profit sharing in your venture.",
     },
     {
-      id: 1,
+      id: 5,
       image: ServiceIcon,
       title: "Service Agreement",
       description:
@@ -155,7 +155,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <div className="=px-6 py-10 mx-auto bg-[#FAF9F6] ">
+      <div className="px-6 py-10 mx-auto bg-[#FAF9F6] ">
         <Cards data={cardData} />
       </div>
       </>

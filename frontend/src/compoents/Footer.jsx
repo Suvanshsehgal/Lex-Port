@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import { NavLink } from "react-router-dom";
 import logo2 from "../assets/logo2.png";
 
@@ -26,29 +26,29 @@ const Footer = () => {
           <h4 className="font-semibold text-lg mb-4">Generate a Document</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/#rent-agreement" className="hover:underline">
+              <a href="#card-1" className="hover:underline">
                 Rent Agreement
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/#nda" className="hover:underline">
+              <a href="#card-2" className="hover:underline">
                 Non-Disclosure Agreement (NDA)
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/#freelance" className="hover:underline">
+              <a href="#card-3" className="hover:underline">
                 Freelance Agreement
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/#service" className="hover:underline">
+              <a href="#card-5" className="hover:underline">
                 Service Agreement
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/#partnership" className="hover:underline">
+              <a href="#card-4" className="hover:underline">
                 Partnership Agreement
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
@@ -58,27 +58,33 @@ const Footer = () => {
           <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <NavLink to="/" className="hover:underline">
+              <NavLink to="/home" className="hover:underline">
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about" className="hover:underline">
-                About Us
+              <Link
+                to="about-section"
+                smooth={true}
+                duration={500}
+                offset={-70} // adjust based on your navbar height
+                className="hover:underline"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <NavLink to="/consult" className="hover:underline">
+                Consult
               </NavLink>
             </li>
             <li>
-              <NavLink to="/services" className="hover:underline">
-                Services
+              <NavLink to="/profile" className="hover:underline">
+                Profile
               </NavLink>
             </li>
             <li>
-              <NavLink to="/contact" className="hover:underline">
-                Contact
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/case-studies" className="hover:underline">
+              <NavLink to="/ai" className="hover:underline">
                 AI Assistance
               </NavLink>
             </li>
