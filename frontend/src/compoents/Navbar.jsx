@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo.png';
 import { NavLink } from 'react-router-dom';
-
+import {Link} from 'react-scroll'
 function Navbar() {
   return (
     <nav className="bg-[#FAF9F6] shadow-sm sticky top-0 z-50">
@@ -19,7 +19,7 @@ function Navbar() {
           {/* Navigation Links */}
           <div className="flex space-x-8">
             <NavLink
-              to="/"
+              to="/home"
               className={({ isActive }) =>
                 `px-3 py-2 text-base font-medium transition-colors ${
                   isActive
@@ -31,18 +31,15 @@ function Navbar() {
               Home
             </NavLink>
 
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `px-3 py-2 text-base font-medium transition-colors ${
-                  isActive
-                    ? 'text-[#1e463c] underline underline-offset-4'
-                    : 'text-[#1e463c] hover:text-[#16382f]'
-                }`
-              }
-            >
-            About
-            </NavLink>
+            <Link
+  to="about-section"
+  smooth={true}
+  duration={500}
+  offset={-70} // adjust if you have a fixed navbar
+  className="px-3 py-2 text-base font-medium transition-colors text-[#1e463c] hover:text-[#16382f] cursor-pointer"
+>
+  About
+</Link>
 
             <NavLink
               to="/consult"
@@ -76,7 +73,7 @@ function Navbar() {
             to="/consultation"
             className="bg-[#1e463c] text-white px-6 py-2 rounded-md text-base font-medium hover:opacity-90 transition-colors shadow-sm"
           >
-            Free Consultation
+            Get AI Assistance
           </NavLink>
         </div>
       </div>
