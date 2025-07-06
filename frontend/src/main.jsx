@@ -9,6 +9,7 @@ import LegalLandingPage from './pages/LandingPage.jsx'
 import Home from './pages/Home.jsx'
 import Profile from './pages/Profile.jsx'
 import Consult from './pages/Consult.jsx'
+import RentAgreementForm from './pages/RentAggrementForm.jsx'
 import App from './App.jsx'
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path:'consult',
         element:<Consult/>
+      },
+      {
+        path:'rentaggrement',
+        element:<RentAgreementForm/>
       }
     ]
   }

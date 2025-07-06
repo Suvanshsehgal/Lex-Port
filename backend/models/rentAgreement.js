@@ -8,21 +8,30 @@ const RentAgreementSchema = new Schema({
     Address: { type: String, required: true, trim: true },
   },
 
-  TenantCompany: {
-    CompanyName: { type: String, required: true, trim: true },
-    DirectorName: { type: String, required: true, trim: true },
+  Tenant: {
+    Name: { type: String, required: true, trim: true },
+    Working:{type:String,required:true,trim:true},
+    FatherName: { type: String, required: true, trim: true },
     RegisteredAddress: { type: String, required: true, trim: true },
   },
 
   PropertyDetails: {
     PropertyNumber: { type: String, required: true, trim: true },
-    IncludedRooms: { type: String, default: "One Office Room, One Toilet & Bathroom Set" }
+    NumberOfBedrooms:{type: String},
+    Inventory:[
+      {
+        NumberOfFans:{type: String},
+        NumberOfCFLLights:{type: String},
+        NumberOfGeyser:{type: String},
+        NumberOfMirrors:{type: String}
+      }
+    ]
   },
 
   RentDetails: {
     MonthlyRent: { type: Number, required: true },
-    MonthlyRentInWords: { type: String },
-    AdvanceRent: { type: Number, required: true },
+    MaintenanceCharge:{type:String},
+    SecurityDeposit :{type:String},
     Currency: { type: String, default: "INR" },
     PaymentTerms: { type: String, default: "Monthly, excluding electricity and water charges" }
   },
@@ -37,12 +46,9 @@ const RentAgreementSchema = new Schema({
   SignatureSection: {
     SignedAt: { type: String, trim: true }, // Place
     SignedDate: { type: Date, required: true },
-    LandlordSignature: { type: String, trim: true }, // base64 or URL
-    TenantSignature: { type: String, trim: true },
     Witnesses: [
       {
         FullName: { type: String, trim: true },
-        Signature: { type: String },
         SignedDate: { type: Date }
       }
     ]

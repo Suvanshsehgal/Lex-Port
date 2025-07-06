@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 const Cards = ({ data }) => {
   const handleLearnMore = (title) => {
     console.log(`Learn more about ${title}`);
@@ -32,12 +32,14 @@ const Cards = ({ data }) => {
           <p className="text-gray-700 mb-4">{card.description}</p>
 
           {/* Button */}
+          <NavLink to = {card.link} className ="block">
           <button
             onClick={() => handleLearnMore(card.title)}
             className="w-full bg-[#FAF9F6] border-2 border-green-800 text-green-800 py-2 rounded-lg font-medium transition-all duration-300 group-hover:bg-green-800 group-hover:text-white"
           >
             Generate Document
           </button>
+          </NavLink>
         </div>
       ))}
     </div>

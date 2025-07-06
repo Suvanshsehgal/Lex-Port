@@ -21,8 +21,8 @@ function Home() {
       id: 1,
       image: RentIcon,
       title: "Rental Agreement",
-      description:
-        "A simple lease agreement between landlord and tenant — fully customizable for duration, rent, and terms.",
+      description:"A simple lease agreement between landlord and tenant — fully customizable for duration, rent, and terms.",
+      link : "/rentaggrement"
     },
     {
       id: 2,
@@ -30,27 +30,28 @@ function Home() {
       title: "Non-Disclosure Agreement (NDA)",
       description:
         "Protect your sensitive information with an NDA. Ideal for business deals, freelance work, or startup discussions.",
+        link : "/nda"
     },
     {
       id: 3,
       image: FreelanceIcon,
       title: "Freelance Agreement",
-      description:
-        "A legally binding contract between a freelancer and client outlining services, deadlines, and payment terms.",
+      description:"A legally binding contract between a freelancer and client outlining services, deadlines, and payment terms.",
+      link : "/freelanceaggreement"
     },
     {
       id:4,
       image: PartnerIcon,
       title: "Partnership Agreement",
-      description:
-        "Outline terms between partners, including equity, responsibilities, and profit sharing in your venture.",
+      description:"Outline terms between partners, including equity, responsibilities, and profit sharing in your venture.",
+      link : "/partneraggrement"
     },
     {
       id: 5,
       image: ServiceIcon,
       title: "Service Agreement",
-      description:
-        "Set expectations between service provider and client — great for agencies, consultants, or freelancers.",
+      description:"Set expectations between service provider and client — great for agencies, consultants, or freelancers.",
+      link : "/serviceaggrement"
     },
   ];
   return (

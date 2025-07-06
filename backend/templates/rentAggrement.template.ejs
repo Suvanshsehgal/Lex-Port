@@ -3,143 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent Agreement</title>
+    <title>Rental Agreement</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Times New Roman', serif;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 12px;
+            line-height: 1.3;
             margin: 0;
             padding: 0;
             color: #000;
-            background-color: #fff;
         }
         
-        .page {
-            width: 210mm;
-            min-height: 297mm;
+        .content-wrapper {
+            max-width: 210mm; /* A4 width */
             margin: 0 auto;
-            padding: 25mm 20mm;
-            box-sizing: border-box;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 25mm 20mm; /* Top/bottom and left/right margins */
+            min-height: 297mm; /* A4 height */
         }
         
         .header {
-            text-align: right;
-            font-size: 11px;
-            margin-bottom: 30px;
-            color: #666;
-        }
-        
-        .title {
             text-align: center;
-            font-size: 20px;
             font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
             text-decoration: underline;
-            margin: 30px 0 40px 0;
-            letter-spacing: 2px;
-        }
-        
-        .section {
-            margin: 20px 0;
-            text-align: justify;
-            text-indent: 30px;
-        }
-        
-        .section.no-indent {
-            text-indent: 0;
         }
         
         .clause {
-            margin: 15px 0;
-            padding-left: 0;
+            margin-bottom: 10px;
             text-align: justify;
+            text-indent: 0;
         }
         
         .clause-number {
             font-weight: bold;
-            margin-right: 10px;
+        }
+        
+        .annexure {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
         }
         
         .signatures {
-            margin-top: 60px;
+            margin-top: 20px;
         }
         
         .signature-section {
             display: flex;
             justify-content: space-between;
-            margin-top: 50px;
-            align-items: flex-end;
+            margin-top: 15px;
         }
         
         .signature-box {
             text-align: center;
-            width: 220px;
+            width: 45%;
         }
         
-        .signature-line {
-            height: 60px;
-            border-bottom: 2px solid #000;
-            margin-bottom: 15px;
+        .witness-section {
+            margin-top: 15px;
         }
         
-        .witnesses {
-            margin-top: 40px;
+        .witness-box {
+            margin-bottom: 10px;
         }
         
-        .witness-line {
-            margin: 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #000;
-            width: 250px;
-            height: 25px;
-            display: flex;
-            align-items: flex-end;
-        }
-        
-        .page-break-content {
-            page-break-before: always;
-        }
-        
-        .page-break {
-            page-break-before: always;
-        }
-        
-        .continued {
-            text-align: right;
-            font-size: 11px;
-            margin-top: 30px;
-            font-style: italic;
-        }
-        
-        .witness-header {
+        .variable-field {
             font-weight: bold;
-            margin-bottom: 20px;
-            text-decoration: underline;
-        }
-        
-        .final-section {
-            margin: 30px 0;
-            text-align: justify;
-        }
-        
-        strong {
-            font-weight: bold;
-        }
-        
-        .and-section {
-            text-align: center;
-            font-weight: bold;
-            margin: 30px 0;
-            font-size: 16px;
-        }
-        
-        .agreement-header {
-            text-align: center;
-            font-weight: bold;
-            margin: 30px 0;
-            text-decoration: underline;
+            color: #000;
         }
         
         @media print {
@@ -147,149 +84,201 @@
                 margin: 0;
                 padding: 0;
             }
-            .page {
-                width: 100%;
-                min-height: auto;
-                margin: 0;
+            
+            .content-wrapper {
+                max-width: none;
                 padding: 20mm 15mm;
-                box-shadow: none;
+                min-height: auto;
+            }
+            
+            .clause {
+                orphans: 2;
+                widows: 2;
+            }
+            
+            .signatures {
+                page-break-inside: avoid;
+            }
+            
+            .witness-section {
+                page-break-inside: avoid;
+            }
+            
+            .signature-section {
+                page-break-inside: avoid;
             }
         }
         
-        @media screen {
-            body {
-                background-color: #f5f5f5;
-                padding: 20px 0;
-            }
+        @page {
+            margin: 0;
+            size: A4;
         }
     </style>
 </head>
 <body>
-    <div class="page">
-        <div class="header">
-            Prepared by Makaan.com
-        </div>
-
-        <div class="title">
-            RENT AGREEMENT
-        </div>
-
-        <div class="section">
-            This Rent Agreement is made on this <strong><%= new Date(SignatureSection.SignedDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) %></strong> (date of rent agreement) by <strong><%= Landlord.FullName %></strong> S/o <strong><%= Landlord.FathersName || 'Not Specified' %></strong> (father's name of the landlord), Add: <strong><%= Landlord.Address %></strong> (residential address of the landlord). Herein after called the Lessor / Owner, Party Of the first part
-        </div>
-
-        <div class="and-section">
-            AND
-        </div>
-
-        <div class="section">
-            <strong><%= TenantCompany.CompanyName %></strong> (Name of the proposed company), through its proposed director <strong><%= TenantCompany.DirectorName %></strong> (name of the director) called Lessee/Tenant, Party of the Second Part
-        </div>
-
-        <div class="section">
-            That the expression of the term, Lessor/Owner and the Lessee/Tenant Shall mean and include their legal heirs successors, assigns, representative etc. Whereas the Lessor/Owner is the owner and in possession of the property No: <strong><%= PropertyDetails.PropertyNumber %></strong> <strong><%= TenantCompany.RegisteredAddress %></strong> (registered address of the company) and has agreed to let out the <strong><%= PropertyDetails.IncludedRooms %></strong> on said property, to the Lessee/Tenant and the Lessee/Tenant has agreed to take the same on rent of Rs. <strong><%= RentDetails.MonthlyRent %>/-</strong> (<strong><%= RentDetails.MonthlyRentInWords %></strong>) per month.
-        </div>
-
-        <div class="agreement-header">
-            NOW THIS RENT AGREEMENT WITNESSETH AS UNDER:-
-        </div>
-
+    <div class="content-wrapper">
+        <div class="header">RENTAL AGREEMENT</div>
+        
         <div class="clause">
-            <span class="clause-number">1.</span> That the Tenant/Lessee shall pay as the monthly rent of RS. <strong><%= RentDetails.MonthlyRent %>/-</strong> (<strong><%= RentDetails.MonthlyRentInWords %></strong>) per month, <%= RentDetails.PaymentTerms.toLowerCase() %>.
+            This RENTAL AGREEMENT is executed at <span class="variable-field"><%= SignatureSection?.SignedAt || 'PLACE' %></span> on this <span class="variable-field"><%= SignatureSection?.SignedDate ? new Date(SignatureSection.SignedDate).toLocaleDateString('en-IN', { day: 'numeric' }) : 'Date' %></span> day of <span class="variable-field"><%= SignatureSection?.SignedDate ? new Date(SignatureSection.SignedDate).toLocaleDateString('en-IN', { month: 'long' }) : 'Month' %></span>, <span class="variable-field"><%= SignatureSection?.SignedDate ? new Date(SignatureSection.SignedDate).toLocaleDateString('en-IN', { year: 'numeric' }) : 'Year' %></span> by and between:
         </div>
-
+        
         <div class="clause">
-            <span class="clause-number">2.</span> That the Tenant/Lessee shall not sub–let any part of the above said demised premised premises to anyone else under any circumstances without the consent of Owner.
+            <span class="variable-field"><%= Landlord?.FullName || 'Name of the Owner' %></span>,<br>
+            S/o or D/o. <span class="variable-field"><%= Landlord?.FathersName || "Father's Name of the Owner" %></span>,<br>
+            <span class="variable-field"><%= Landlord?.Address || 'Permanent Address of the Owner' %></span><br>
+            (hereinafter jointly and severally called the "OWNER", which expression shall include their heirs, legal representatives, successors and assigns) of the ONE PART:
         </div>
-
+        
         <div class="clause">
-            <span class="clause-number">3.</span> That the Tenant/Lessee shall abide by all the bye-laws, rules and regulation, of the local authorities in respect of the demised premises and shall not do any illegal activities in the said demised premises.
+            AND, in favour of:
         </div>
-
+        
         <div class="clause">
-            <span class="clause-number">4.</span> That this Lease is granted for a period of <strong><%= LeaseTerms.LeaseDurationMonths %> (<%= LeaseTerms.LeaseDurationMonths === 11 ? 'Eleven' : 'Twelve' %>)</strong> months only commencing from <strong><%= new Date(LeaseTerms.LeaseStartDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) %></strong> (date of rent commencing from) and this lease <% if (LeaseTerms.IsRenewable) { %>can be extended further by both the parties with their mutual consent on the basis of prevailing rental value in the market<% } else { %>shall not be extended beyond the specified period<% } %>.
+            <span class="variable-field"><%= Tenant?.Name || 'Name of the Tenant' %></span>,<br>
+            S/o or D/o. <span class="variable-field"><%= Tenant?.FatherName || "Father's Name of the Tenant" %></span>,<br>
+            Working/Studying at <span class="variable-field"><%= Tenant?.Working || 'Address of the Office/Studying Institution' %></span><br>
+            having a permanent address at <span class="variable-field"><%= Tenant?.RegisteredAddress || 'Complete permanent Address of the Tenant' %></span><br>
+            (hereinafter called the "TENANT", which expression shall include its legal representatives, successors and assigns) of the OTHER PART.
         </div>
-
+        
         <div class="clause">
-            <span class="clause-number">5.</span> That the Lessee shall pay Electricity & Water charge as per the proportionate consumption of the meter to the Lessor/Owner.
+            WHEREAS the Owner is the absolute owner of the property situated at <span class="variable-field"><%= PropertyDetails?.PropertyNumber || 'Complete Address of the Rented Property' %></span> as detailed in Annexure-I, hereinafter referred to as "Demised Premises".
         </div>
-
+        
         <div class="clause">
-            <span class="clause-number">6.</span> That the Tenant/Lessee shall not be entitled to make structure in the rented premises except the installation of temporary decoration, wooden partition/cabin, air–conditioners etc. without the prior consent of the owner.
+            WHEREAS the Tenant has requested the Owner to grant Rent with respect to the Schedule Premises and the Owner has agreed to rent out to the Tenant the Property with two-wheeler and four-wheeler parking space in the ground floor for residential purposes only, on the following terms and conditions:
         </div>
-
+        
         <div class="clause">
-            <span class="clause-number">7.</span> That the Tenant/lessee can neither make addition/alteration in the said premises without the written consent of the owner, nor the lessee can sublet part or entire premises to any person(s)/firm(s)/company(s).
+            <strong>NOW THIS DEED WITNESSETH AS FOLLOWS:</strong>
         </div>
-
-        <div class="continued">
-            Contd: 2/-
+        
+        <div class="clause">
+            <span class="clause-number">1.</span> The rent in respect of the "Demised Premises" shall commence from <span class="variable-field"><%= LeaseTerms?.LeaseStartDate ? new Date(LeaseTerms.LeaseStartDate).toLocaleDateString('en-IN') : 'Starting Date of Agreement' %></span> and shall be valid till <span class="variable-field"><%= LeaseTerms?.LeaseEndDate ? new Date(LeaseTerms.LeaseEndDate).toLocaleDateString('en-IN') : 'Expiry Date of Agreement' %></span>. Thereafter, the same may be extended further on mutual consent of both the parties.
         </div>
-
-        <div class="page-break-content">
+        
+        <div class="clause">
+            <span class="clause-number">2.</span> That the Tenant shall pay to the Owner a monthly rent of Rs.<span class="variable-field"><%= RentDetails?.MonthlyRent || 'Amount of rent in Numbers' %></span>, excluding electricity and water bill. The rent shall be paid on or before 7th day of each month without fail.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">3.</span> That the Tenant shall pay to the Owner a monthly maintenance charge of Rs.<span class="variable-field"><%= RentDetails?.MaintenanceCharge || 'Amount in Numbers' %></span> towards the maintenance of Generator & Elevator, Salaries towards guards, Charges for Electricity Maintenance for Common Areas, Charges towards cleaning of Common Areas and towards maintaining the lawn.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">4.</span> That the Tenant shall pay for the running cost of elevator and generator separately to the Owner.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">5.</span> That during the Rent period, in addition to the rental amount payable to the Owner, the Tenant shall pay for the use of electricity and water as per bills received from the authorities concerned directly. For all the dues of electricity bills and water bills till the date the possession of the premises is handed over by the Owner to the Tenant it is the responsibility of the Owner to pay and clear them according to the readings on the respective meters. At the time of handing over possession of the premises back to the Owner by Tenant, it is the responsibility of the Tenant to pay electricity & water bills, as presented by the Departments concerned according to the readings on the respective meters upto the date of vacation of the property.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">6.</span> The Tenant will pay to the Owner an interest-free refundable security deposit of Rs.<span class="variable-field"><%= RentDetails?.SecurityDeposit || 'Amount in Numbers' %></span> vide cheque no <span class="variable-field"><%= RentDetails?.ChequeNumber || 'Cheque Number' %></span> dated <span class="variable-field"><%= RentDetails?.ChequeDate || 'date of the cheque' %></span> at the time of signing the Rent Agreement. The said amount of the Security deposit shall be refunded by the Owner to the Tenant at the time of handing over possession of the demised premises by the Tenant upon expiry or sooner termination of this Rent after adjusting any dues (if any) or cost towards damages caused by the negligence of the Tenant or the person he is responsible for, normal wear & tear and damages due to act of god exempted. In case the Owner fails to refund the security deposit to the Tenant on early termination or expiry of the Rent agreement, the Tenant is entitled to hold possession of the Rented premises, without payment of rent and/or any other charges whatsoever, till such time the Owner refunds the security deposit to the Tenant. This is without prejudice and in addition to the other remedies available to the Tenant to recover the amount from the Owner.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">7.</span> That all the sanitary, electrical and other fittings and fixtures and appliances in the premises shall be handed over from the Owner to the Tenant in good working condition.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">8.</span> That the Tenant shall not sublet, assign or part with the demised premises in whole or part thereof to any person in any circumstances whatsoever and the same shall be used for the bonafide residential purposes only.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">9.</span> That the day-to-day minor repairs will be the responsibility for the Tenant at his/her own expense. However, any structural or major repairs, if so required, shall be carried out by the Owner.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">10.</span> That no structural additions or alterations shall be made by the Tenant in the premises without the prior written consent of the Owner but the Tenant can install air-conditioners in the space provided and other electrical gadgets and make such changes for the purposes as may be necessary, at his own cost. On termination of the tenancy or earlier, the Tenant will be entitled to remove such equipment and restore the changes made, if any, to the original state.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">11.</span> That the Owner shall hold the right to visit in person or through his authorized agent(s), servants, workmen etc., to enter upon the demised premises for inspection (not exceeding once in a month) or to carry out repairs / construction, as and when required.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">12.</span> That the Tenant shall comply with all the rules and regulations of the local authority applicable to the demised premises. The premises will be used only for residential purposes of its employees, families and guests.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">13.</span> That the Owner shall pay for all taxes/cesses levied on the premises by the local or government authorities in the way of property tax for the premises and so on. Further, any other payment in the nature of subscription or periodical fee to the welfare association shall be paid by the Owner.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">14.</span> That the Owner will keep the Tenant free and harmless from any claims, proceedings, demands, or actions by others with respect to quiet possession of the premises.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">15.</span> That this Rent Agreement can be terminated before the expiry of this tenancy period by serving One month prior notice in writing by either party.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">16.</span> The Tenant shall maintain the Demised Premises in good and tenable condition and all the minor repairs such as leakage in the sanitary fittings, water taps and electrical usage etc. shall be carried out by the Tenant. That it shall be the responsibility of the Tenant to hand over the vacant and peaceful possession of the demised premises on expiry of the Rent period, or on its early termination, as stated hereinabove in the same condition subject to natural wear and tear.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">17.</span> That in case, where the Premises are not vacated by the Tenant, at the termination of the Rent period, the Tenant will pay damages calculated at two times the rent for any period of occupation commencing from the expiry of the Rent period. The payment of damages as aforesaid will not preclude the Owner from initiating legal proceedings against the Tenant for recovering possession of premises or for any other purpose.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">18.</span> That both the parties shall observe and adhere to the terms and conditions contained hereinabove.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">19.</span> That the Tenant and Owners represent and warrant that they are fully empowered and competent to make this Rent. That both the parties have read over and understood all the contents of this agreement and have signed the same without any force or pressure from any side.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">20.</span> In case of any dispute to this agreement and the clauses herein, the same will be settled in the jurisdiction of the <span class="variable-field"><%= SignatureSection?.SignedAt || 'city' %></span> civil courts.
+        </div>
+        
+        <div class="clause">
+            <span class="clause-number">21.</span> That the Rent Agreement will be registered in front of the Registrar and the charges towards stamp duty, court fee & lawyer/coordinator will be equally borne by the Owner and Tenant.
+        </div>
+        
+        <div class="annexure">
+            ANNEXURE-I
+        </div>
+        
+        <div class="clause">
+            The <span class="variable-field"><%= PropertyDetails?.PropertyNumber || 'Complete Address' %></span> of the Property, consisting <span class="variable-field"><%= PropertyDetails?.NumberOfBedrooms || 'Number of Bedrooms' %></span> bedrooms, living room, family lounge, kitchen, servant room and inbuilt fittings & fixtures and inventory of <span class="variable-field"><%= PropertyDetails?.Inventory?.NumberOfFans || 'Number of Fans' %></span>, <span class="variable-field"><%= PropertyDetails?.Inventory?.NumberOfCFLLights || 'Number of CFL Lights' %></span>, <span class="variable-field"><%= PropertyDetails?.Inventory?.NumberOfGeyser || 'Number of Geyser' %></span>, <span class="variable-field"><%= PropertyDetails?.Inventory?.NumberOfMirrors || 'Number of Mirrors' %></span>.
+        </div>
+        
+        <div class="signatures">
             <div class="clause">
-            <span class="clause-number">8.</span> That the Tenant/Lessee shall permit the Lessor/Owner or his Authorized agent to enter in to the said tenanted premises for inspection/general checking or to carry out the repair work, at any reasonable time.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">9.</span> That the Tenant/Lessee shall keep the said premises in clean & hygienic condition and shall not do or causes to be done any act which may be a nuisance to other.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">10.</span> That the Tenant/Lessees shall carry on all day to day minor repairs at his/her own cost.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">11.</span> That this Agreement may be terminated before the expiry of this tenancy period by serving One month prior notice by either party for this intention.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">12.</span> That the Lessee shall use the above said premises for Official Purpose Only.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">13.</span> That the Lessee/Tenant Shall not store/Keep any offensive, dangerous, explosive or highly Inflammable articles in the said premises and shall not use the same for any unlawful activities.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">14.</span> That the Lessee shall pay the one month's advance rent to the Lessor the same shall be adjusted in monthly rent.
-        </div>
-
-        <div class="clause">
-            <span class="clause-number">15.</span> That both the parties have read over and understood all the contents of this agreement and have signed the same without any force or pressure from any side.
-        </div>
-
-        <div class="final-section">
-            In WITNESS WHEREOF the lessor/Owner and the Tenant/Lessee have hereunto subscribed their hand at <strong><%= SignatureSection.SignedAt || 'Not Specified' %></strong> (place) on this the <strong><%= new Date(SignatureSection.SignedDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) %></strong> (date of rent agreement) year first above Mentioned in presents of the following Witnesses
-        </div>
-
-        <div class="witnesses">
-            <div class="witness-header">WITNESSES:-</div>
-            <% if (SignatureSection.Witnesses && SignatureSection.Witnesses.length > 0) { %>
-                <% SignatureSection.Witnesses.forEach((witness, index) => { %>
-                    <div class="witness-line"><%= index + 1 %>. <%= witness.FullName || '' %></div>
-                <% }); %>
-                <% for (let i = SignatureSection.Witnesses.length; i < 2; i++) { %>
-                    <div class="witness-line"><%= i + 1 %>. </div>
-                <% } %>
-            <% } else { %>
-                <div class="witness-line">1. </div>
-                <div class="witness-line">2. </div>
-            <% } %>
-        </div>
-
-        <div class="signature-section">
-            <div class="signature-box">
-                <div class="signature-line"></div>
-                <div><strong><%= Landlord.FullName %></strong></div>
-                <div>Lessor</div>
+                <strong>IN WITNESS WHEREOF BOTH PARTIES AGREES AND SIGNS THIS AGREEMENT ON THIS DAY AND YEAR</strong>
             </div>
-            <div class="signature-box">
-                <div class="signature-line"></div>
-                <div><strong><%= TenantCompany.CompanyName %></strong></div>
-                <div>Lessee</div>
+            
+            <div class="witness-section">
+                <strong>WITNESSES:</strong>
+                <div class="witness-box">
+                    1. <span class="variable-field"><%= SignatureSection?.Witnesses && SignatureSection.Witnesses[0] ? SignatureSection.Witnesses[0].FullName : 'Name of the Witness' %></span><br>
+                       <span class="variable-field"><%= SignatureSection?.Witnesses && SignatureSection.Witnesses[0] ? SignatureSection.Witnesses[0].Signature : 'Signature of the Witness' %></span><br>
+                       <span class="variable-field"><%= SignatureSection?.Witnesses && SignatureSection.Witnesses[0] ? SignatureSection.Witnesses[0].Address : 'Address of the Witness' %></span>
+                </div>
+                
+                <div class="witness-box">
+                    2. <span class="variable-field"><%= SignatureSection?.Witnesses && SignatureSection.Witnesses[1] ? SignatureSection.Witnesses[1].FullName : 'Name of the Witness' %></span><br>
+                       <span class="variable-field"><%= SignatureSection?.Witnesses && SignatureSection.Witnesses[1] ? SignatureSection.Witnesses[1].Signature : 'Signature of the Witness' %></span><br>
+                       <span class="variable-field"><%= SignatureSection?.Witnesses && SignatureSection.Witnesses[1] ? SignatureSection.Witnesses[1].Address : 'Address of the Witness' %></span>
+                </div>
             </div>
-        </div>
+            
+            <div class="signature-section">
+                <div class="signature-box">
+                    <div class="variable-field"><%= Landlord?.Signature || 'Signature of the Owner' %></div><br>
+                    <div class="variable-field"><%= Landlord?.FullName || 'Name of the Owner' %></div><br>
+                    <strong>OWNER</strong>
+                </div>
+                
+                <div class="signature-box">
+                    <div class="variable-field"></div><br>
+                    <div class="variable-field"></div><br>
+                    <strong>TENANT</strong>
+                </div>
+            </div>
         </div>
     </div>
 </body>
