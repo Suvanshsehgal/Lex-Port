@@ -18,12 +18,13 @@ function Login() {
   try {
     const response = await API.post("/login", { email, password });
 
-    // ✅ Login successful
+    // Login successful
     console.log("Login success:", response.data);
     setErrorMessage(""); // make sure no old error shows
     setSuccessMessage(response.data.message); // Optional: Show "Login successful" message
 
-    localStorage.setItem("token", response.data.data.token); // if your backend sends token inside `data`
+    localStorage.setItem("token", response.data.data.token); 
+    console.log("Token stored:", response.data.data.token);// if your backend sends token inside `data`
     // optionally redirect or navigate
   } catch (err) {
     // 🔥 This block should only run when login fails

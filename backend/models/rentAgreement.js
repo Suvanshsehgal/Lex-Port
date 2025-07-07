@@ -2,6 +2,13 @@ import mongoose, { Schema } from "mongoose";
 import { LegalDocument } from "./form.models.js"; // base model
 
 const RentAgreementSchema = new Schema({
+
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: false,
+  },
+
   Landlord: {
     FullName: { type: String, required: true, trim: true },
     FathersName: { type: String, trim: true },

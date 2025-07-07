@@ -43,24 +43,25 @@ export const submitDocument = asyncHandler(async (req, res) => {
       throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);
   }
 
-  const document = await documentModel.create(req.body);
+  const document = await documentModel.create({
+    ...req.body,
+    user:req.user.id
+  });
 
-  // ✅ Generate local PDF
+
   const pdfPath = await generatePDFLocally(document.toObject());
 
-  // ✅ Read PDF as Buffer
+
   const pdfBuffer = fs.readFileSync(pdfPath);
 
-  // ✅ Set headers and send PDF
   res.set({
     'Content-Type': 'application/pdf',
     'Content-Disposition': 'attachment; filename="agreement.pdf"',
   });
   res.send(pdfBuffer);
 
-  // ✅ Delete file after sending (non-blocking)
   fs.unlink(pdfPath, (err) => {
     if (err) console.error("Error deleting PDF:", err);
-    else console.log("✅ Temp PDF deleted");
+    else console.log(" Temp PDF deleted");
   });
 });
