@@ -65,3 +65,15 @@ export const submitDocument = asyncHandler(async (req, res) => {
     else console.log(" Temp PDF deleted");
   });
 });
+
+export const getUserHistory = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  const documents = await RentAgreement.find({ user: userId }).sort({ createdAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    message: "User history fetched successfully",
+    data: documents
+  });
+});
