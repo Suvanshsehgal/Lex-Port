@@ -1,22 +1,19 @@
 import { RentAgreement } from "../models/rentAgreement.js";
-import { LegalDocument } from "../models/form.models.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
-import { uploadImage, uploadFileToCloudinary } from "../utils/cloudinary.js";
+import { uploadImage } from "../utils/cloudinary.js";
 import { generatePDFLocally } from "../utils/puppeteerHelper.js";
 import fs from "fs";
+import path from "path";
 
 export const submitDocument = asyncHandler(async (req, res) => {
   console.log("📨 New document submission received:", JSON.stringify(req.body, null, 2));
 
   const { DocumentType } = req.body;
-
   if (!DocumentType) {
     throw new ApiError(400, "DocumentType is required.");
   }
 
-  // ✅ Parse SignatureSection if sent as string
   if (req.body.SignatureSection && typeof req.body.SignatureSection === "string") {
     try {
       req.body.SignatureSection = JSON.parse(req.body.SignatureSection);
@@ -25,12 +22,10 @@ export const submitDocument = asyncHandler(async (req, res) => {
     }
   }
 
-  // ✅ Initialize SignatureSection if missing
   if (!req.body.SignatureSection) {
     req.body.SignatureSection = {};
   }
 
-  // ✅ Handle signature image upload
   if (req.file) {
     const uploaded = await uploadImage(req.file.path);
     if (!uploaded?.url) {
@@ -39,47 +34,33 @@ export const submitDocument = asyncHandler(async (req, res) => {
     req.body.SignatureSection.SignatureImage = uploaded.url;
   }
 
-  // ✅ Choose document model
   let documentModel;
   switch (DocumentType) {
     case "RentAgreement":
       documentModel = RentAgreement;
       break;
-
     default:
       throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);
   }
 
-  // ✅ Save form data to database
   const document = await documentModel.create(req.body);
 
-  // ✅ Generate PDF locally using Puppeteer
+  // ✅ Generate local PDF
   const pdfPath = await generatePDFLocally(document.toObject());
 
-  // ✅ Upload the PDF to Cloudinary
-  const cloudinaryResult = await uploadFileToCloudinary(pdfPath, "documents");
+  // ✅ Read PDF as Buffer
+  const pdfBuffer = fs.readFileSync(pdfPath);
 
-  if (!cloudinaryResult?.url) {
-    throw new ApiError(500, "Failed to upload PDF to Cloudinary");
-  }
+  // ✅ Set headers and send PDF
+  res.set({
+    'Content-Type': 'application/pdf',
+    'Content-Disposition': 'attachment; filename="agreement.pdf"',
+  });
+  res.send(pdfBuffer);
 
-  // ✅ Delete local file after upload
-  if (fs.existsSync(pdfPath)) {
-  fs.unlinkSync(pdfPath);
-} else {
-  console.warn("⚠️ Tried to delete a non-existent file:", pdfPath);
-}
-
-  // ✅ Optionally store the PDF URL in DB
-  document.pdfUrl = cloudinaryResult.url;
-  await document.save();
-
-  // ✅ Send response
-  return res
-    .status(201)
-    .json(
-      new ApiResponse(201, { document, pdfUrl: cloudinaryResult.url }, `${DocumentType} submitted and PDF uploaded successfully.`)
-    );
+  // ✅ Delete file after sending (non-blocking)
+  fs.unlink(pdfPath, (err) => {
+    if (err) console.error("Error deleting PDF:", err);
+    else console.log("✅ Temp PDF deleted");
+  });
 });
-
-export default submitDocument;
