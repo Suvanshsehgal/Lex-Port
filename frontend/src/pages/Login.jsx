@@ -3,6 +3,7 @@ import GoogleLogo from "../assets/GoogleLogo.png";
 import Logo from "../assets/logo2.png";
 import LoginImage from "../assets/Login.png";
 import { useNavigate } from "react-router-dom";
+import loader from "../assets/Loader1.gif";
 import API from "../api";
 
 function Login() {
@@ -10,17 +11,19 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Added state
   const [successMessage,setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
   e.preventDefault();
   setErrorMessage(""); 
-  setSuccessMessage(""); 
+  setSuccessMessage("");
+  setIsLoading(true);
 
   try {
     const response = await API.post("/login", { email, password });
 
-    // Login successful
+    
     console.log("Login success:", response.data);
     setErrorMessage("");
     setSuccessMessage(response.data.message); 
@@ -38,6 +41,7 @@ function Login() {
 
     const code = err.response?.data?.code;
     const message = err.response?.data?.message;
+    setIsLoading(false)
 
     if (code === 401) {
       setErrorMessage("Incorrect password.");
@@ -54,6 +58,22 @@ function Login() {
   };
 
   return (
+    
+    <>
+    {isLoading && (
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50">
+    <div className="flex flex-col items-center">
+      <img
+        src={loader}
+        alt="Loading..."
+        className="w-16 h-16 animate-pulse"
+      />
+      <p className="mt-4 text-white text-lg font-medium">Logging you in...</p>
+    </div>
+  </div>
+)}
+
+
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Image */}
       <div
@@ -174,6 +194,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

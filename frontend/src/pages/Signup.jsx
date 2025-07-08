@@ -3,6 +3,7 @@ import GoogleLogo from "../assets/GoogleLogo.png";
 import Logo from "../assets/logo2.png";
 import LoginImage from "../assets/Login.png";
 import API from "../api";
+import loader from "../assets/Loader1.gif";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -11,12 +12,14 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSucessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setSucessMessage("");
+    setIsLoading(true);
     try {
       const res = await API.post("/register", {
         Username: username, // assuming your backend uses "name"
@@ -38,7 +41,7 @@ function Signup() {
       }, 2000);
     } catch (err) {
       const code = err.response?.data?.code;
-
+      setIsLoading(false)
     
       switch (code) {
         case "USER_EXISTS":
@@ -59,6 +62,21 @@ function Signup() {
     console.log("Google sign-in clicked");
   };
   return (
+    <>
+
+     {isLoading && (
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50">
+        <div className="flex flex-col items-center">
+          <img
+            src={loader}
+            alt="Loading..."
+            className="w-16 h-16 animate-pulse"
+          />
+          <p className="mt-4 text-white text-lg font-medium">Registering the User...</p>
+        </div>
+      </div>
+    )}
+
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Image */}
       <div
@@ -192,6 +210,7 @@ function Signup() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

@@ -1,10 +1,12 @@
-import { useState  } from "react";
+import { useState } from "react";
 import axios from "axios";
+import loader from "../assets/Loader1.gif";
 import API from "../api";
 
 export default function RentAgreementForm() {
   const [pdfUrl, setPdfUrl] = useState("");
   const [showDownloadBtn, setShowDownloadBtn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     DocumentType: "RentAgreement",
 
@@ -72,51 +74,77 @@ export default function RentAgreementForm() {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const form = new FormData();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    setIsLoading(true);
+    const stime = Date.now();
 
-  const flatten = (obj, prefix = "") => {
-    for (const key in obj) {
-      const path = prefix ? `${prefix}.${key}` : key;
-      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-        flatten(obj[key], path);
-      } else if (Array.isArray(obj[key])) {
-        obj[key].forEach((val, i) => {
-          if (typeof val === "object") {
-            flatten(val, `${path}[${i}]`);
-          } else {
-            form.append(`${path}[${i}]`, val);
-          }
-        });
-      } else {
-        form.append(path, obj[key]);
+    const flatten = (obj, prefix = "") => {
+      for (const key in obj) {
+        const path = prefix ? `${prefix}.${key}` : key;
+        if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+          flatten(obj[key], path);
+        } else if (Array.isArray(obj[key])) {
+          obj[key].forEach((val, i) => {
+            if (typeof val === "object") {
+              flatten(val, `${path}[${i}]`);
+            } else {
+              form.append(`${path}[${i}]`, val);
+            }
+          });
+        } else {
+          form.append(path, obj[key]);
+        }
       }
+    };
+
+    flatten(formData);
+
+    try {
+      const response = await API.post(
+        "http://localhost:7000/api/v1/user/documents",
+        form,
+        {
+          responseType: "blob", // PDF as blob
+        }
+      );
+      const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
+      setPdfUrl(blobUrl);
+      setShowDownloadBtn(true); 
+
+      const eTime = Date.now() - stime;
+    const reTime = Math.max(2000 - eTime, 0);
+    setTimeout(() => setIsLoading(false), reTime);
+
+    setTimeout(() => {
+      setIsLoading(false);
+       window.scrollTo({ top: 0, behavior: "smooth" });
+    }, reTime);
+      
+    } catch (error) {
+      setIsLoading(false);
+      console.error(" Submission failed", error);
+      alert("Failed to submit form or generate PDF.");
     }
   };
 
-  flatten(formData);
-
-  try {
-    const response = await API.post(
-      "http://localhost:7000/api/v1/user/documents",
-      form,
-      {
-        responseType: "blob", // PDF as blob
-      }
-    );
-
-    const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
-    setPdfUrl(blobUrl); 
-    setShowDownloadBtn(true); // 👈 show button
-  } catch (error) {
-    console.error(" Submission failed", error);
-    alert("Failed to submit form or generate PDF.");
-  }
-};
-
   return (
     <>
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50">
+          <div className="flex flex-col items-center">
+            <img
+              src={loader}
+              alt="Loading..."
+              className="w-16 h-16 animate-pulse"
+            />
+            <p className="mt-4 text-white text-lg font-medium">
+              Submitting the form....
+            </p>
+          </div>
+        </div>
+      )}
       <form
         onSubmit={handleSubmit}
         className="bg-[#FAF9F6] p-8 min-h-screen text-green-900"
@@ -131,17 +159,17 @@ const handleSubmit = async (e) => {
           Please fill in the details to generate the agreement.
         </p>
 
-            {showDownloadBtn && pdfUrl && (
-  <div className="flex item-center justify-center my-8 ">
-    <a
-      href={pdfUrl}
-      download="RentAgreement.pdf"
-      className="bg-[#1e463c] text-white px-6 py-3 rounded-md shadow-lg  hover:bg-green-950 transition w-96 text-center"
-    >
-     Download PDF
-    </a>
-  </div>
-)}
+        {showDownloadBtn && pdfUrl && (
+          <div className="flex item-center justify-center my-8 ">
+            <a
+              href={pdfUrl}
+              download="RentAgreement.pdf"
+              className="bg-[#1e463c] text-white px-6 py-3 rounded-md shadow-lg  hover:bg-green-950 transition w-96 text-center"
+            >
+              Download PDF
+            </a>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Landlord Info */}
