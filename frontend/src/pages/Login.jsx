@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GoogleLogo from "../assets/GoogleLogo.png";
 import Logo from "../assets/logo2.png";
 import LoginImage from "../assets/Login.png";
+import { useNavigate } from "react-router-dom";
 import API from "../api";
 
 function Login() {
@@ -9,26 +10,31 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Added state
   const [successMessage,setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  setErrorMessage(""); // clear old error
-  setSuccessMessage(""); // if you added success feedback
+  setErrorMessage(""); 
+  setSuccessMessage(""); 
 
   try {
     const response = await API.post("/login", { email, password });
 
     // Login successful
     console.log("Login success:", response.data);
-    setErrorMessage(""); // make sure no old error shows
-    setSuccessMessage(response.data.message); // Optional: Show "Login successful" message
+    setErrorMessage("");
+    setSuccessMessage(response.data.message); 
 
     localStorage.setItem("token", response.data.data.token); 
-    console.log("Token stored:", response.data.data.token);// if your backend sends token inside `data`
-    // optionally redirect or navigate
+    localStorage.setItem("user", JSON.stringify(response.data.data.user));  
+    console.log("Token stored:", response.data.data.token);
+
+     setTimeout(() => {
+      navigate("/home");
+    }, 2000);
+
   } catch (err) {
-    // 🔥 This block should only run when login fails
-    console.error("🔥 Full error response:", err.response?.data);
+    console.error(" Full error response:", err.response?.data);
 
     const code = err.response?.data?.code;
     const message = err.response?.data?.message;

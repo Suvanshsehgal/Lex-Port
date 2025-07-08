@@ -28,7 +28,9 @@ function Signup() {
 
       if (res.data?.data?.token) {
         localStorage.setItem("token", res.data.data.token);
+         localStorage.setItem("user", JSON.stringify(res.data.data.user));
         console.log("Token stored:", res.data.data.token);
+        console.log("User stored:", res.data.data.user);
       }
 
       setTimeout(() => {
@@ -37,7 +39,7 @@ function Signup() {
     } catch (err) {
       const code = err.response?.data?.code;
 
-      // ✅ Set custom error messages based on code
+    
       switch (code) {
         case "USER_EXISTS":
           setErrorMessage("User already exists with this email or username.");
