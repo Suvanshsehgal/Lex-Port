@@ -26,9 +26,14 @@ function Signup() {
       setSucessMessage(res.data.message);
       console.log("Signup successful:", res.data);
 
-       setTimeout(() => {
-      navigate("/home");
-    }, 2000);
+      if (res.data?.data?.token) {
+        localStorage.setItem("token", res.data.data.token);
+        console.log("Token stored:", res.data.data.token);
+      }
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
     } catch (err) {
       const code = err.response?.data?.code;
 

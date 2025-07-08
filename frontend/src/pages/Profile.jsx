@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../compoents/Navbar'
 import Footer from '../compoents/Footer' 
+import History from '../compoents/History'
 function Profile() {
   return (
     <>
@@ -28,6 +29,7 @@ function Profile() {
        Log-Out
       </button>
     </div>
+    <History/>
     <Footer/>
     </>
     

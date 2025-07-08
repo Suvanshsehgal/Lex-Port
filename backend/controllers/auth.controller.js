@@ -18,7 +18,7 @@ const registeruser = asyncHandler(async (req, res) => {
   });
 
   if (existingUser) {
-    throw new ApiError(409, "User already exists",[] , "" ,"USER_EXISTS");
+    throw new ApiError(409, "User already exists", [], "", "USER_EXISTS");
   }
 
   const user = await User.create({ Username, email, password });
@@ -26,24 +26,44 @@ const registeruser = asyncHandler(async (req, res) => {
   const createdUser = await User.findById(user._id).select("-password");
 
   if (!createdUser) {
-    throw new ApiError(500, "User creation failed" ,[], "" , USER_CREATION_FAILED) ;
+    throw new ApiError(
+      500,
+      "User creation failed",
+      [],
+      "",
+      USER_CREATION_FAILED
+    );
   }
+  const token = jwt.sign(
+    { id: createdUser._id, email: createdUser.email },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
 
-  return res
-    .status(201)
-    .json(new ApiResponse(201, "User registered successfully", createdUser));
+  return res.status(201).json(
+    new ApiResponse(201, "User registered successfully", {
+      token,
+      user: createdUser,
+    })
+  );
 });
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new ApiError(400, "Please provide email and password" , [], "", "MISSING_FIELDS");
+    throw new ApiError(
+      400,
+      "Please provide email and password",
+      [],
+      "",
+      "MISSING_FIELDS"
+    );
   }
 
   const user = await User.findOne({ email });
   if (!user) {
-    throw new ApiError(404, "User not found",[], "", "EMAIL_NOT_FOUND");
+    throw new ApiError(404, "User not found", [], "", "EMAIL_NOT_FOUND");
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -53,7 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const token = jwt.sign(
     { id: user._id, email: user.email },
-    process.env.JWT_SECRET, 
+    process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
 
@@ -64,7 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
         id: user._id,
         Username: user.Username,
         email: user.email,
-      }
+      },
     })
   );
 });

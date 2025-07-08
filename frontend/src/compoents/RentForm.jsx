@@ -1,5 +1,6 @@
 import { useState  } from "react";
 import axios from "axios";
+import API from "../api";
 
 export default function RentAgreementForm() {
   const [pdfUrl, setPdfUrl] = useState("");
@@ -97,7 +98,7 @@ const handleSubmit = async (e) => {
   flatten(formData);
 
   try {
-    const response = await axios.post(
+    const response = await API.post(
       "http://localhost:7000/api/v1/user/documents",
       form,
       {
@@ -109,8 +110,8 @@ const handleSubmit = async (e) => {
     setPdfUrl(blobUrl); 
     setShowDownloadBtn(true); // 👈 show button
   } catch (error) {
-    console.error("❌ Submission failed", error);
-    alert("❌ Failed to submit form or generate PDF.");
+    console.error(" Submission failed", error);
+    alert("Failed to submit form or generate PDF.");
   }
 };
 
