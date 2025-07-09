@@ -46,10 +46,7 @@ const History = () => {
               className="bg-white p-4 rounded-lg shadow-md border border-gray-200"
             >
               <p><strong> Type:</strong> {doc.DocumentType || "N/A"}</p>
-              <p><strong> Date:</strong> {new Date(doc.createdAt).toLocaleString()}</p>
-              <p><strong> Tenant:</strong> {doc.Tenant?.Name || "Unknown"}</p>
-              <p><strong> Rent:</strong> ₹{doc.RentDetails?.MonthlyRent}</p>
-              
+              <p><strong> Date:</strong> {new Date(doc.createdAt).toLocaleString()}</p>           
             </div>
           ))}
         </div>

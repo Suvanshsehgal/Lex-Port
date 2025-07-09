@@ -104,13 +104,28 @@ export const submitDocument = asyncHandler(async (req, res) => {
 export const getUserHistory = asyncHandler(async (req, res) => {
   const userId = req.user._id;
 
-  const documents = await RentAgreement.find({ user: userId }).sort({
-    createdAt: -1,
-  });
+  // Fetch all documents related to the user from different models
+  const rentAgreements = await RentAgreement.find({ user: userId });
+  const ndaAgreements = await NdaAgreement.find({ user: userId });
+  const freelanceAgreements = await FreelanceAgreement.find({ user: userId });
+  const partnershipAgreements = await PartnershipAgreement.find({ user: userId });
+  const serviceAgreements = await ServiceAgreement.find({ user: userId });
+
+  // Add a type label to each document to identify its source
+  const documents = [
+    ...rentAgreements.map(doc => ({ ...doc._doc, type: 'RentAgreement' })),
+    ...ndaAgreements.map(doc => ({ ...doc._doc, type: 'NdaAgreement' })),
+    ...freelanceAgreements.map(doc => ({ ...doc._doc, type: 'FreelanceAgreement' })),
+    ...partnershipAgreements.map(doc => ({ ...doc._doc, type: 'PartnershipAgreement' })),
+    ...serviceAgreements.map(doc => ({ ...doc._doc, type: 'ServiceAgreement' })),
+  ];
+
+  // Sort all documents by createdAt in descending order
+  documents.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   res.status(200).json({
     success: true,
     message: "User history fetched successfully",
     data: documents,
   });
-});
+});;
