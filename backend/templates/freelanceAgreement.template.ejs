@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Agreement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 20px;
+            color: #000;
+        }
+        
+        .letterhead {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .page-info {
+            text-align: right;
+            margin-bottom: 20px;
+            font-size: 10px;
+        }
+        
+        .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+        
+        .agreement-details {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .parties {
+            margin-bottom: 30px;
+        }
+        
+        .party {
+            margin-bottom: 15px;
+        }
+        
+        .clause {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .clause-number {
+            font-weight: bold;
+        }
+        
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .signature-section {
+            width: 45%;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #000;
+            width: 200px;
+            margin: 20px auto;
+            height: 40px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+        }
+        
+        .page-break {
+            page-break-before: always;
+            margin-top: 0;
+            padding-top: 0;
+        }
+        
+        @media print {
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        .underline {
+            text-decoration: underline;
+        }
+        
+        .bold {
+            font-weight: bold;
+        }
+        
+        .indent {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="page-info">
+        Page 1 of 2
+    </div>
+    
+    <div class="title">
+        FREELANCE AGREEMENT
+    </div>
+    
+    <div class="agreement-details">
+        This Freelance Agreement is made at <span class="bold"><%= AgreementLocation?.city || '{Enter City' %>, <%= AgreementLocation?.state || 'State}' %></span> and effective this <span class="bold"><%= EffectiveDate || '1st Day of January, 2016' %></span>
+    </div>
+    
+    <div class="parties">
+        <div class="party">
+            <span class="bold">BETWEEN:</span> <%= Client?.CompanyName || '…………………………………' %> Ltd. (the "Client"), a Private Limited Company/Partnership Firm registered in India having its registered office at: <%= Client?.RegisteredAddress || '…………………………………' %> , India.
+            <div class="indent">the Party to the First part</div>
+        </div>
+        
+        <div class="party">
+            <span class="bold">AND:</span> M/s...<%= Freelancer?.CompanyName || '…………………………………………' %> (the "Freelancer") a Private Limited Company/Partnership Firm registered in India having its registered office at: <%= Freelancer?.RegisteredAddress || '…………………………………' %> , India.
+            <div class="indent">the Party to the Second part</div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 10px;">
+            (Collectively referred to as ''Parties'')
+        </div>
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        The following terms and conditions are agreed upon by both parties:
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">1) Assignment/Project:</span> This Agreement covers following assignments/ projects to be carried by the Freelancer:
+        <div style="margin-top: 10px; font-style: italic;">
+            <%= AssignmentDetails || '{Details of the assignment/project to be carried by Freelancer for Client}' %>
+        </div>
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">2) Contract Period:</span> 
+        Freelancer and Client agree that this Agreement shall begin on the date listed above, and continue <%= ContractPeriod?.EndCondition || 'until the assignment/project is completed, or until terminated by either party' %>.
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">3) Compensation:</span> Client agrees to pay Amount of Rs.<%= Compensation?.AmountNumeric || '..........' %> (Rupees <%= Compensation?.AmountNumeric ? Compensation.AmountNumeric : '-------------------------------' %> only) per <%= Compensation?.PaymentBasis || 'Hour, Day, Week, Month, year, or a flat fee' %> to Freelancer, and will release the payment on <%= Compensation?.PaymentFrequency || 'Weekly Basis, Monthly Basis, Completion of job, etc.' %> Freelancer will submit an invoice to Client on <%= Compensation?.PaymentFrequency || 'Weekly Basis, Monthly Basis, Completion of job, etc.' %>
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">4) Financial Obligation:</span> Freelancer agrees that he/she/it is an independent contractor, and not an employee of Client Company/LLP. Freelancer therefore agrees that he/she/it is responsible for reporting he/she/it own income to the appropriate authorities.
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">5) Relationship:</span> 
+        Freelancer and Client stipulate that this Agreement does not imply any other relationship between the Client and Freelancer, and that any additional relationship desired by either party must be outlined in a Separate Agreement.
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">6) Owner:</span> The Client will have sole ownership of the assignment/project work mentioned herein above in Clause and rights to publish the work.
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">7) Non Disclosure:</span> 
+        The Freelancer should not disclose the details of the Client or the Assignment/Work unless required and approved by the Client in writing. Company can combine this agreement with Separate NDA
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">8) Termination:</span> The Client/ Freelancer may terminate this contract on mutual consent and in writing and on reasonable, just & fair grounds which are not detrimental to the interests of the Company/ Freelancer.
+    </div>
+    
+    <div class="clause">
+        <span class="clause-number">9) Arbitration/Conciliation:</span> In case of any dispute under this agreement, the Courts of <%= Jurisdiction?.CityDistrict || 'City/District' %>, <%= Jurisdiction?.Country || 'India' %> will have jurisdiction for Arbitration/ Conciliation.
+    </div>
+    
+    <div class="page-break">
+
+        
+        <div class="page-info">
+            Page 2 of 2
+        </div>
+        
+        <div style="margin-top: 30px; margin-bottom: 20px; text-align: justify;">
+            This Agreement has been executed on the date set forth herein in two (2) copies of which the Parties have taken one each.
+        </div>
+        
+        <div class="signatures">
+            <div class="signature-section">
+                <div class="bold">For Client,</div>
+                <div style="margin: 10px 0;">
+                    <%= Client?.CompanyName || '{Enter M/s. FULL COMPANY NAME}' %>
+                </div>
+                <div class="signature-line"></div>
+                <div><%= Client?.SignatoryName || '…………………………………' %></div>
+                <div style="margin-top: 10px;">
+                    <%= Client?.SignatoryDesignation || 'Managing Director/ Director/ CEO' %><br>
+                    /Partner/Proprietor
+                </div>
+            </div>
+            
+            <div class="signature-section">
+                <div class="bold">For Freelancer,</div>
+                <div style="margin: 10px 0;">
+                    <%= Freelancer?.CompanyName || '{Enter M/s. FULL COMPANY NAME}' %>
+                </div>
+                <div class="signature-line"></div>
+                <div><%= Freelancer?.SignatoryName || '…………………………………' %></div>
+                <div style="margin-top: 10px;">
+                    <%= Freelancer?.SignatoryDesignation || 'Managing Director/ Director/ CEO' %><br>
+                    Partner/ Proprietor
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div><span class="bold">Place:</span> <%= SigningDetails?.Place || '.........................' %></div>
+            <div><span class="bold">Date:</span> <%= SigningDetails?.Date || 'DD/MM/YYYY' %></div>
+        </div>
+    </div>
+</body>
+</html>

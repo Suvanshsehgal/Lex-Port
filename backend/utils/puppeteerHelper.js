@@ -26,6 +26,10 @@ export const generatePDFLocally = async (data) => {
       templateFile = "ndaAggrement.template.ejs";
       fileName = `nda-${uuidv4()}.pdf`;
       break;
+    case "FreelanceAgreement":
+      templateFile = "freelanceAgreement.template.ejs";
+      fileName = `freelance-aggrement-${uuidv4()}.pdf`;
+      break;
     default:
       throw new Error(`Unsupported DocumentType: ${DocumentType}`);
   }
