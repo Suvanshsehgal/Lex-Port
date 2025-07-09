@@ -1,4 +1,5 @@
 import { RentAgreement } from "../models/rentAgreement.js";
+import { NdaAgreement } from "../models/ndaAgreement.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { uploadImage } from "../utils/cloudinary.js";
@@ -7,14 +8,20 @@ import fs from "fs";
 import path from "path";
 
 export const submitDocument = asyncHandler(async (req, res) => {
-  console.log("📨 New document submission received:", JSON.stringify(req.body, null, 2));
+  console.log(
+    "📨 New document submission received:",
+    JSON.stringify(req.body, null, 2)
+  );
 
   const { DocumentType } = req.body;
   if (!DocumentType) {
     throw new ApiError(400, "DocumentType is required.");
   }
 
-  if (req.body.SignatureSection && typeof req.body.SignatureSection === "string") {
+  if (
+    req.body.SignatureSection &&
+    typeof req.body.SignatureSection === "string"
+  ) {
     try {
       req.body.SignatureSection = JSON.parse(req.body.SignatureSection);
     } catch (err) {
@@ -39,24 +46,36 @@ export const submitDocument = asyncHandler(async (req, res) => {
     case "RentAgreement":
       documentModel = RentAgreement;
       break;
+    case "NdaAgreement":
+      documentModel = NdaAgreement;
+      break;
     default:
       throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);
   }
 
   const document = await documentModel.create({
     ...req.body,
-    user:req.user.id
+    user: req.user.id,
   });
 
+  const today = new Date();
+  const agreementDay = today.getDate();
+  const agreementMonth = today.toLocaleString("default", { month: "long" });
+  const agreementYear = today.getFullYear();
 
-  const pdfPath = await generatePDFLocally(document.toObject());
-
+  const pdfPath = await generatePDFLocally({
+    ...document.toObject(),
+    DocumentType,
+    agreementDay,
+    agreementMonth,
+    agreementYear,
+  });
 
   const pdfBuffer = fs.readFileSync(pdfPath);
 
   res.set({
-    'Content-Type': 'application/pdf',
-    'Content-Disposition': 'attachment; filename="agreement.pdf"',
+    "Content-Type": "application/pdf",
+    "Content-Disposition": 'attachment; filename="agreement.pdf"',
   });
   res.send(pdfBuffer);
 
@@ -69,11 +88,13 @@ export const submitDocument = asyncHandler(async (req, res) => {
 export const getUserHistory = asyncHandler(async (req, res) => {
   const userId = req.user._id;
 
-  const documents = await RentAgreement.find({ user: userId }).sort({ createdAt: -1 });
+  const documents = await RentAgreement.find({ user: userId }).sort({
+    createdAt: -1,
+  });
 
   res.status(200).json({
     success: true,
     message: "User history fetched successfully",
-    data: documents
+    data: documents,
   });
 });

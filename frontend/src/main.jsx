@@ -9,6 +9,7 @@ import LegalLandingPage from './pages/LandingPage.jsx'
 import Home from './pages/Home.jsx'
 import Profile from './pages/Profile.jsx'
 import Consult from './pages/Consult.jsx'
+import NdaAgree from './pages/NdaAgree.jsx'
 import RentAgreementForm from './pages/RentAggrementForm.jsx'
 import App from './App.jsx'
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path:'rentaggrement',
         element:<RentAgreementForm/>
+      },
+      {
+        path:'ndaagreement',
+        element: <NdaAgree/>
       }
     ]
   }

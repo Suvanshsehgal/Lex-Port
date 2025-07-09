@@ -30,7 +30,7 @@ function Home() {
       title: "Non-Disclosure Agreement (NDA)",
       description:
         "Protect your sensitive information with an NDA. Ideal for business deals, freelance work, or startup discussions.",
-        link : "/nda"
+        link : "/ndaagreement"
     },
     {
       id: 3,
