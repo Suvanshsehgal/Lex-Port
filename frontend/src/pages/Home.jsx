@@ -44,7 +44,7 @@ function Home() {
       image: PartnerIcon,
       title: "Partnership Agreement",
       description:"Outline terms between partners, including equity, responsibilities, and profit sharing in your venture.",
-      link : "/partneraggrement"
+      link : "/partnershipaggreement"
     },
     {
       id: 5,

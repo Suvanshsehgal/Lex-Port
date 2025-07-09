@@ -12,6 +12,7 @@ import Consult from './pages/Consult.jsx'
 import NdaAgree from './pages/NdaAgree.jsx'
 import RentAgreementForm from './pages/RentAggrementForm.jsx'
 import FreelanceAgree from './pages/FreelanceAgree.jsx'
+import PartnershipAgreement from './pages/PartnershipAgreement.jsx'
 import App from './App.jsx'
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path:'freelanceaggreement',
         element: <FreelanceAgree/>
+      },
+      {
+        path:'partnershipaggreement',
+        element: <PartnershipAgreement/>
       }
     ]
   }

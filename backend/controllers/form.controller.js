@@ -1,6 +1,7 @@
 import { RentAgreement } from "../models/rentAgreement.js";
 import { NdaAgreement } from "../models/ndaAgreement.js";
 import { FreelanceAgreement } from "../models/freelanceAgree.model.js";
+import { PartnershipAgreement } from "../models/partnerAgree.model.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { uploadImage } from "../utils/cloudinary.js";
@@ -53,6 +54,9 @@ export const submitDocument = asyncHandler(async (req, res) => {
     case "FreelanceAgreement":
       documentModel = FreelanceAgreement;
       break;
+    case "PartnershipAgreement":
+      documentModel = PartnershipAgreement;
+      break;
     default:
       throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);
   }
@@ -62,10 +66,13 @@ export const submitDocument = asyncHandler(async (req, res) => {
     user: req.user.id,
   });
 
-  const today = new Date();
-  const agreementDay = today.getDate();
-  const agreementMonth = today.toLocaleString("default", { month: "long" });
-  const agreementYear = today.getFullYear();
+  const rawDate = req.body.agreementDate || new Date().toISOString();
+  const parsedDate = new Date(rawDate);
+  const agreementDay = parsedDate.getDate();
+  const agreementMonth = parsedDate.toLocaleString("default", {
+    month: "long",
+  });
+  const agreementYear = parsedDate.getFullYear();
 
   const pdfPath = await generatePDFLocally({
     ...document.toObject(),
@@ -73,8 +80,9 @@ export const submitDocument = asyncHandler(async (req, res) => {
     agreementDay,
     agreementMonth,
     agreementYear,
+    
   });
-
+  
   const pdfBuffer = fs.readFileSync(pdfPath);
 
   res.set({

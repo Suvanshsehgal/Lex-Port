@@ -30,6 +30,10 @@ export const generatePDFLocally = async (data) => {
       templateFile = "freelanceAgreement.template.ejs";
       fileName = `freelance-aggrement-${uuidv4()}.pdf`;
       break;
+    case "PartnershipAgreement":
+      templateFile = "partnershipAgreement.template.ejs";
+      fileName = `partnership-aggrement-${uuidv4()}.pdf`;
+      break;
     default:
       throw new Error(`Unsupported DocumentType: ${DocumentType}`);
   }
@@ -49,6 +53,6 @@ export const generatePDFLocally = async (data) => {
   await page.pdf({ path: outputPath, format: "A4", printBackground: true });
 
   await browser.close();
-
+  
   return outputPath;
 };
