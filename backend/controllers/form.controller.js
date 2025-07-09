@@ -2,6 +2,7 @@ import { RentAgreement } from "../models/rentAgreement.js";
 import { NdaAgreement } from "../models/ndaAgreement.js";
 import { FreelanceAgreement } from "../models/freelanceAgree.model.js";
 import { PartnershipAgreement } from "../models/partnerAgree.model.js";
+import { ServiceAgreement } from "../models/serviceAgree.model.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { uploadImage } from "../utils/cloudinary.js";
@@ -56,6 +57,9 @@ export const submitDocument = asyncHandler(async (req, res) => {
       break;
     case "PartnershipAgreement":
       documentModel = PartnershipAgreement;
+      break;
+    case "ServiceAgreement":
+      documentModel = ServiceAgreement;
       break;
     default:
       throw new ApiError(400, `Unsupported DocumentType: ${DocumentType}`);

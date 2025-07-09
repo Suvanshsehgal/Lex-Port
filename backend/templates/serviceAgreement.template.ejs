@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Agreement</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0.5in;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page {
+            padding: 15px;
+            box-sizing: border-box;
+            page-break-after: always;
+            min-height: calc(100vh - 30px);
+        }
+        
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .section {
+            margin: 4px 0;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin: 4px 0 2px 0;
+            font-size: 14px;
+        }
+        
+        .subsection {
+            margin: 2px 0 2px 15px;
+            font-size: 14px;
+        }
+        
+        .subsection-title {
+            font-weight: bold;
+            margin: 2px 0 1px 0;
+            display: inline;
+        }
+        
+        .payment-details {
+            margin: 2px 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .signature-section {
+            margin-top: 8px;
+            page-break-inside: avoid;
+        }
+        
+        .signature-block {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .signature-line {
+            display: inline;
+            font-weight: normal;
+        }
+        
+        .indent {
+            margin-left: 20px;
+        }
+        
+        .notice-section {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+        
+        .notice-address {
+            margin: 3px 0;
+            font-weight: bold;
+        }
+        
+        .variable {
+            display: inline;
+            font-weight: normal;
+        }
+        
+        .payment-method {
+            margin: 1px 0;
+            font-size: 14px;
+        }
+        
+        .service-item {
+            margin: 1px 0;
+            font-size: 14px;
+        }
+        
+        .service-item:before {
+            content: counter(service-counter, lower-alpha) ". ";
+            counter-increment: service-counter;
+        }
+        
+        .services-list {
+            counter-reset: service-counter;
+            margin: 2px 0;
+        }
+        
+        .services-list .service-item {
+            margin-left: 15px;
+        }
+        
+        .compact-text {
+            font-size: 14px;
+            line-height: 1.15;
+        }
+        
+        .intro-paragraph {
+            font-size: 14px;
+            line-height: 1.1;
+            margin: 3px 0;
+        }
+        
+        .blank-note {
+            text-align: center;
+            margin: 10px 0;
+            font-style: italic;
+            font-size: 14px;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+        }
+        
+        .column {
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        /* Responsive text sizing based on content length */
+        .dynamic-spacing {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Ultra compact spacing for single page */
+        .ultra-compact-section {
+            margin: 1px 0;
+        }
+        
+        .ultra-compact-section .section-title {
+            margin: 1px 0 0px 0;
+        }
+        
+        .ultra-compact-section p {
+            margin: 0px 0;
+        }
+        
+        .ultra-compact-section .subsection {
+            margin: 0px 0 0px 15px;
+            font-size: 14px;
+        }
+        
+        .ultra-compact-section .compact-text {
+            font-size: 14px;
+            line-height: 1.05;
+        }
+        
+        /* Additional styles for better formatting */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .no-break {
+            page-break-inside: avoid;
+        }
+        
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .signature-table td {
+            width: 50%;
+            vertical-align: top;
+            padding: 0 10px;
+        }
+        
+        .signature-line-extended {
+            border-bottom: 1px solid #333;
+            display: inline-block;
+            width: 150px;
+            margin-left: 5px;
+        }
+        
+        .form-line {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+        
+        .blank-space {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="title">Service Agreement</div>
+        
+        <div class="intro-paragraph dynamic-spacing">
+            This Service Agreement (the "<strong>Agreement</strong>") is entered into 
+            <span class="variable"><%= effectiveDate %></span> (the "<strong>Effective Date</strong>") by and between 
+            <span class="variable"><%= customer.name %></span> (the "<strong>Customer</strong>") located at 
+            <span class="variable"><%= customer.address %></span> and 
+            <span class="variable"><%= serviceProvider.name %></span> (the "<strong>Service Provider</strong>") located at 
+            <span class="variable"><%= serviceProvider.address %></span>, also individually referred to as the "<strong>Party</strong>", and collectively the "<strong>Parties</strong>".
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">1. Services.</div>
+            <p class="compact-text">The Service Provider shall perform the services listed in this Section 1 (the "Services").</p>
+            <div class="services-list">
+                <% services.forEach(function(service, index) { %>
+                    <div class="service-item dynamic-spacing"><%= service %></div>
+                <% }); %>
+            </div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">2. Compensation.</div>
+            <p class="compact-text">The Customer agrees to pay the Service Provider $<span class="variable"><%= compensation.totalFee %></span> as payment for the Services provided. This fee will be paid in accordance with the following schedule:</p>
+            
+            <div class="payment-details">Total Cost of the Services: $<span class="variable"><%= compensation.totalCost %></span></div>
+            <div class="payment-details">Amount Due at Signing: $<span class="variable"><%= compensation.dueAtSigning %></span></div>
+            <div class="payment-details">Amount Due at Completion: $<span class="variable"><%= compensation.dueAtCompletion %></span></div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">3. Expenses.</div>
+            <p class="compact-text">The Customer agrees to reimburse the Service Provider for all expenses incurred as a result of performing the Services. The Service Provider agrees to submit all expenses to the Customer for approval prior to incurring the expense. All expenses must be approved in writing. The Customer will not be liable to reimburse the Service Provider for any expense(s) that was not pre-approved.</p>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">4. Payment.</div>
+            <p class="compact-text">The Service Provider shall submit an invoice to the Customer every <span class="variable"><%= paymentDetails.invoiceEveryDays %></span> days. Invoices shall be paid within <span class="variable"><%= paymentDetails.paymentDueInDays %></span> days from the date of the invoice. Payments may be made by the following methods:</p>
+            
+            <div class="indent">
+                <% if (paymentDetails.paymentMethods && paymentDetails.paymentMethods.length > 0) { %>
+                    <% paymentDetails.paymentMethods.forEach(function(method) { %>
+                        <div class="payment-method dynamic-spacing"><%= method %></div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="payment-method">[Payment methods to be specified]</div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">5. Term.</div>
+            <p class="compact-text">The term of this Agreement shall commence on the Effective Date, as stated above, and continue for <span class="variable"><%= contractTerm.duration %></span>, unless otherwise terminated per the terms of this Agreement.</p>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">6. Termination.</div>
+            <div class="subsection">
+                <div class="subsection-title">a.</div>
+                <span class="compact-text">Either Party may terminate the Agreement at any time upon <span class="variable"><%= terminationNoticePeriod.days %></span> days prior written notice to the other Party. In the event the Customer terminates the Agreement, the Customer shall still remain obligated to pay the Service Provider for any Services performed up to the date of termination and any expenses approved, but not paid, prior to the date of termination.</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">b.</div>
+                <span class="compact-text">This Agreement will automatically terminate when both Parties have performed all of their obligations under the Agreement and all payments have been received.</span>
+            </div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">7. Relationship of the Parties.</div>
+            <div class="subsection">
+                <div class="subsection-title">a. No Exclusivity.</div>
+                <span class="compact-text">The Parties understand this Agreement is not an exclusive arrangement. The Parties agree they are free to enter into other similar agreements with other parties.</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">b. Independent Contractor.</div>
+                <span class="compact-text">The Service Provider is an independent contractor. Neither Party is an agent, representative, partner, or employee of the other Party.</span>
+            </div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">8. Dispute Resolution.</div>
+            <div class="subsection">
+                <div class="subsection-title">a. Choice of Law.</div>
+                <span class="compact-text">This Agreement shall be governed by <span class="variable"><%= governingLaw %></span> law.</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">b. Negotiation.</div>
+                <span class="compact-text">In the event of a dispute, the Parties agree to work towards a resolution through good faith negotiation.</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">c. Mediation or Binding Arbitration.</div>
+                <span class="compact-text">In the event that a dispute cannot be resolved through good faith negotiation, the Parties agree to submit to binding mediation or arbitration.</span>
+            </div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">9. General.</div>
+            <div class="subsection">
+                <div class="subsection-title">a. Assignment.</div>
+                <span class="compact-text">The Parties may not assign their rights and/or obligations under this Agreement.</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">b. Complete Contract.</div>
+                <span class="compact-text">This Agreement constitutes the Parties entire understanding of their rights and obligations.</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">c. Severability.</div>
+                <span class="compact-text">If any section of this Agreement is found to be invalid, illegal, or unenforceable, the rest of this Agreement will still be enforceable.</span>
+            </div>
+        </div>
+
+        <div class="section ultra-compact-section">
+            <div class="section-title">10. Notices.</div>
+            <p class="compact-text">All notices under this Agreement must be sent by email with read receipt requested or by certified or registered mail with return receipt requested. Notices shall be sent as follows:</p>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="notice-address">Customer</div>
+                    <% if (notices && notices.customerNotice && notices.customerNotice.length > 0) { %>
+                        <% notices.customerNotice.forEach(function(line) { %>
+                            <div class="dynamic-spacing"><%= line %></div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="dynamic-spacing">[Customer address]</div>
+                    <% } %>
+                </div>
+                
+                <div class="column">
+                    <div class="notice-address">Service Provider</div>
+                    <% if (notices && notices.serviceProviderNotice && notices.serviceProviderNotice.length > 0) { %>
+                        <% notices.serviceProviderNotice.forEach(function(line) { %>
+                            <div class="dynamic-spacing"><%= line %></div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="dynamic-spacing">[Service Provider address]</div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signature Section on Same Page -->
+        <div class="signature-section no-break">
+            <p class="compact-text" style="font-size: 14px; margin: 8px 0 5px 0; font-weight: bold;">
+                The Parties agree to the terms and conditions set forth above as demonstrated by their signatures as follows:
+            </p>
+            
+            <table class="signature-table">
+                <tr>
+                    <td>
+                        <div class="signature-block">
+                            <div class="notice-address" style="font-size: 14px; margin-bottom: 8px;">Customer</div>
+                            <div class="form-line">
+                                <strong>Signed:</strong> <span class="signature-line-extended"></span>
+                            </div>
+                            <div class="form-line">
+                                <strong>Name:</strong> <span class="variable"><%= signatures.customer.name %></span>
+                            </div>
+                            <div class="form-line">
+                                <strong>Date:</strong> <span class="variable"><%= signatures.customer.date %></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="signature-block">
+                            <div class="notice-address" style="font-size: 14px; margin-bottom: 8px;">Service Provider</div>
+                            <div class="form-line">
+                                <strong>Signed:</strong> <span class="signature-line-extended"></span>
+                            </div>
+                            <div class="form-line">
+                                <strong>Name:</strong> <span class="variable"><%= signatures.serviceProvider.name %></span>
+                            </div>
+                            <div class="form-line">
+                                <strong>Date:</strong> <span class="variable"><%= signatures.serviceProvider.date %></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Dynamic spacing adjustment based on content length
+        document.addEventListener('DOMContentLoaded', function() {
+            const variables = document.querySelectorAll('.variable');
+            
+           
+            
+            // Adjust service items spacing for single page
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach(function(item) {
+                if (item.textContent.length > 80) {
+                    item.style.fontSize = '7px';
+                    item.style.lineHeight = '1.0';
+                } else {
+                    item.style.fontSize = '8px';
+                }
+            });
+            
+            // Adjust payment methods spacing for single page
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(function(method) {
+                if (method.textContent.length > 50) {
+                    method.style.fontSize = '7px';
+                } else {
+                    method.style.fontSize = '8px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
