@@ -5,6 +5,7 @@ import AboutUsImage3 from "../assets/AboutUsImage3.png";
 import StarIcon from "../assets/StarIcon.png";
 import ServiceIcon from "../assets/ServiceIcon.png";
 import RentIcon from "../assets/RentIcon.png";
+import Chat from "../compoents/Chat";
 import NDAIcon from "../assets/NDAIcon.png";
 import PartnerIcon from "../assets/PartnerIcon.png";
 import FreelanceIcon from "../assets/FreelanceIcon.png";
@@ -253,6 +254,7 @@ function Home() {
     </div>
   </section>
       </>
+      <Chat/>
       <Footer/>
     </>
   );

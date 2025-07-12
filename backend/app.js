@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
+import chatRoutes from './routes/chatbot.routes.js'
 import cors from 'cors';
 import  submitDocument  from './routes/form.routes.js';
 import bodyParser from 'body-parser';
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
     res.send("Started Lex-port server");
 });
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/user/chat",chatRoutes);
 app.use("/api/v1/user",submitDocument);
 
 app.use(errorMiddleware);
