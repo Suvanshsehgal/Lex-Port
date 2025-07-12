@@ -2,8 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import API from "../api";
 import chatIcon from '../assets/ChatbotIcon.png';
 
-export default function Chat() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Chat(props) {
+  // const [isOpen, setIsOpen] = useState(false);
+  const isOpen = props.isOpen;
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     { 
@@ -15,7 +16,7 @@ export default function Chat() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const toggleChat = () => setIsOpen(!isOpen);
+  const toggleChat = props.toogleChat;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

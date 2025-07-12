@@ -1,8 +1,9 @@
 import React from 'react'
 import HeroSectionImage from '../assets/HeroSectionImage.png';
+import { Link } from 'react-scroll';
 
 
-function HeroSection() {
+function HeroSection(props) {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage :`url(${HeroSectionImage})` }}>
       {/* Background overlay */}
@@ -27,10 +28,19 @@ function HeroSection() {
         
         {/* Buttons */}
        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-  <button className="bg-[#FAF9F6] text-[#1e463c] px-8 py-4 rounded-lg font-semibold text-lg transform transition-transform duration-300 hover:scale-105 shadow-lg w-full sm:w-auto min-w-[200px]">
+    
+    <Link  to="document-section"
+              smooth={true}
+              duration={500}
+              offset={-70}>
+    <button className="bg-[#FAF9F6] text-[#1e463c] px-8 py-4 rounded-lg font-semibold text-lg transform transition-transform duration-300 hover:scale-105 shadow-lg w-full sm:w-auto min-w-[200px]">
     Generate a Document
   </button>
-  <button className="border-2 border-[#FAF9F6] text-[#FAF9F6]  px-8 py-4 rounded-lg font-semibold text-lg transform transition-transform duration-300 hover:scale-105 shadow-lg w-full sm:w-auto min-w-[200px]">
+    </Link>
+  
+  <button 
+  onClick={props.showchat}
+  className="border-2 border-[#FAF9F6] text-[#FAF9F6]  px-8 py-4 rounded-lg font-semibold text-lg transform transition-transform duration-300 hover:scale-105 shadow-lg w-full sm:w-auto min-w-[200px]">
     Get AI Assistance
   </button>
 </div>

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Navbar from "../compoents/Navbar";
 import Footer from "../compoents/Footer";
+import Chat from "../compoents/Chat";
 import LawyerProfiles from "../compoents/LawyerCard";
 import HeroSectionImage from "../assets/HeroSectionImage.png";
 import HeroConsult1 from "../assets/HeroConsult1.png";
 
 function Consult() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showchat , setShowChat] = useState(false);
 
   const lawyersData = [
     {
@@ -69,7 +71,7 @@ function Consult() {
 
   return (
     <>
-      <Navbar />
+      <Navbar showchat={() => {setShowChat(true)}}/>
 
       {/* Hero Section with Search - Updated Design */}
       <div
@@ -102,6 +104,7 @@ function Consult() {
       <div className="bg-[#FAF9F6] ">
         <LawyerProfiles lawyers={filteredLawyers} />
       </div>
+      <Chat isOpen ={showchat} toogleChat={()=>setShowChat(prev => !prev)} />
       <Footer />
     </>
   );

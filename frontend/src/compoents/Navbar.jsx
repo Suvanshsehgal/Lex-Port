@@ -2,13 +2,13 @@ import React from "react";
 import logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
-function Navbar() {
+function Navbar(props) {
   return (
     <nav className="bg-[#FAF9F6] shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 py-2">
           {/* Logo */}
-          <NavLink to="/" className="hover:opacity-80 transition-opacity">
+          <NavLink to="/home" className="hover:opacity-80 transition-opacity">
             <img
               src={logo}
               alt="Lex-Port Logo"
@@ -70,7 +70,7 @@ function Navbar() {
 
           {/* Free Consultation Button */}
           <NavLink
-            to="/consultation"
+            onClick={props.showchat}
             className="bg-[#1e463c] text-white px-6 py-2 rounded-md text-base font-medium hover:opacity-90 transition-colors shadow-sm"
           >
             Get AI Assistance

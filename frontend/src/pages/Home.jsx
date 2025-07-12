@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../compoents/Navbar";
 import HeroSection from "../compoents/HeroSection";
 import AboutUsImage3 from "../assets/AboutUsImage3.png";
@@ -17,6 +17,9 @@ import Footer from "../compoents/Footer";
 
 
 function Home() {
+
+  const [showchat , setShowChat] = useState(false);
+
   const cardData = [
     {
       id: 1,
@@ -57,8 +60,8 @@ function Home() {
   ];
   return (
     <>
-      <Navbar />
-      <HeroSection />
+      <Navbar showchat={() => {setShowChat(true)}}/>
+      <HeroSection showchat={() => {setShowChat(true)}} />
       {/* About Section */}
       <>
         <section id="about-section" className="bg-[#FAF9F6] py-16 px-6">
@@ -126,7 +129,7 @@ function Home() {
       </>
       {/* Cards */}
       <>
-      <section className="py-12 bg-[#FAF9F6] px-6">
+      <section id="document-section" className="py-12 bg-[#FAF9F6] px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-4">
             {/* Left SVG */}
@@ -254,7 +257,8 @@ function Home() {
     </div>
   </section>
       </>
-      <Chat/>
+    
+      <Chat isOpen ={showchat} toogleChat={()=>setShowChat(prev => !prev)} />
       <Footer/>
     </>
   );
