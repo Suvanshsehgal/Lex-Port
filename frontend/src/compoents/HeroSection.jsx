@@ -32,8 +32,8 @@ function HeroSection(props) {
     <Link  to="document-section"
               smooth={true}
               duration={500}
-              offset={-70}>
-    <button className="bg-[#FAF9F6] text-[#1e463c] px-8 py-4 rounded-lg font-semibold text-lg transform transition-transform duration-300 hover:scale-105 shadow-lg w-full sm:w-auto min-w-[200px]">
+              className="bg-[#FAF9F6] text-[#1e463c] px-8 py-4 rounded-lg font-semibold text-lg transform transition-transform duration-300 hover:scale-105 shadow-lg w-full sm:w-auto min-w-[200px]">
+    <button >
     Generate a Document
   </button>
     </Link>
