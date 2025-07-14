@@ -47,7 +47,7 @@ export const generatePDFLocally = async (data) => {
 
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: puppeteer.executablePath(),
+    executablePath: '/opt/render/project/.cache/puppeteer/chrome/linux-138.0.7204.92/chrome-linux64/chrome',
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
