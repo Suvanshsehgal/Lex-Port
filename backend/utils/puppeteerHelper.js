@@ -45,12 +45,20 @@ export const generatePDFLocally = async (data) => {
   const templatePath = path.join(__dirname, `../templates/${templateFile}`);
   const html = await ejs.renderFile(templatePath, data);
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: '/opt/render/project/.cache/puppeteer/chrome/linux-138.0.7204.92/chrome-linux64/chrome',
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+ const chromePath = path.join(
+  process.cwd(),
+  ".puppeteer_cache",
+  "chrome",
+  "linux-138.0.7204.92",
+  "chrome-linux64",
+  "chrome"
+);
 
+const browser = await puppeteer.launch({
+  headless: true,
+  executablePath: chromePath,
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+});
   const page = await browser.newPage();
   await page.setContent(html, { waitUntil: "networkidle0" });
 
