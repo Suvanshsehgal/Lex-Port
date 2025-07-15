@@ -88,7 +88,7 @@ export default function ServiceAgreementForm() {
     flatten(formData);
 
     try {
-      const response = await API.post("http://localhost:7000/api/v1/user/documents", form, { responseType: "blob" });
+      const response = await API.post("https://lex-port.onrender.com/api/v1/user/documents", form, { responseType: "blob" });
       const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
       setPdfUrl(blobUrl);
       setShowDownloadBtn(true);

@@ -81,7 +81,7 @@ export default function FreelanceAgreementForm() {
 
     try {
       const response = await API.post(
-        "http://localhost:7000/api/v1/user/documents",
+        "https://lex-port.onrender.com/api/v1/user/documents",
         form,
         { responseType: "blob" }
       );
