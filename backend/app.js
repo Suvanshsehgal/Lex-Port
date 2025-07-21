@@ -10,8 +10,15 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors()); // Allows frontend requests
-app.use(bodyParser.json()); // Parses JSON body
+app.use(cors({
+  origin: 'https://lex-port.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+app.options('*', cors());
+
+app.use(bodyParser.json()); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
