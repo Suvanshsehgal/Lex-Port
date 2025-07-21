@@ -13,12 +13,11 @@ const app = express();
 app.use(cors({
   origin: 'https://lex-port.vercel.app',
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization',
 }));
-app.options('*', cors());
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.json()); // Parses JSON body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
