@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:7000/api/v1/user',
+  baseURL: 'https://lex-port.onrender.com/api/v1/user',
 });
 
 // Added JWT token to every request 

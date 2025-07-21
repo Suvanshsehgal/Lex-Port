@@ -211,7 +211,7 @@
     <div class="header">
         <div class="title">Non-Disclosure Agreement</div>
         <div class="date-line">
-            This Agreement made on this the <span class="bold">9th</span> day of <span class="bold">July</span>, <span class="bold">2025</span>
+            This Agreement made on this the <span class="bold"><%= new Date().getDate() %>th</span> day of <span class="bold"><%= new Date().toLocaleString('default', { month: 'long' }) %></span>, <span class="bold"><%= new Date().getFullYear() %></span>
         </div>
     </div>
 
@@ -219,9 +219,9 @@
         <div class="parties-title">By and Between</div>
         
         <div class="party-info">
-            <span class="party-name">ABC Corporation</span>, a company incorporated under the Companies Act, 1956 
-            and having its registered office at <span class="bold">123 Business Park, Mumbai, Maharashtra - 400001</span> 
-            (hereinafter referred to as "<span class="bold">ABC Corporation</span>", which expression shall unless repugnant to 
+            <span class="party-name"><%= Party1?.PartyName || 'ABC Corporation' %></span>, a company incorporated under the Companies Act, 1956 
+            and having its registered office at <span class="bold"><%= Party1?.PartyAddress || '123 Business Park, Mumbai, Maharashtra - 400001' %></span> 
+            (hereinafter referred to as "<span class="bold"><%= Party1?.PartyName || 'ABC Corporation' %></span>", which expression shall unless repugnant to 
             the context or meaning thereof, include its successors in interests and 
             assigns) <span class="small-caps bold">of the one part</span>;
         </div>
@@ -231,8 +231,8 @@
         </div>
 
         <div class="party-info">
-            <span class="party-name">XYZ Technologies Private Limited</span>, a company incorporated under the 
-            Companies Act, 2013 and having its registered office at <span class="bold">456 Tech Hub, Bangalore, Karnataka - 560001</span> 
+            <span class="party-name"><%= Party2?.Party2Name || 'XYZ Technologies Private Limited' %></span>, a company incorporated under the 
+            Companies Act, 2013 and having its registered office at <span class="bold"><%= Party2?.Party2Address || '456 Tech Hub, Bangalore, Karnataka - 560001' %></span> 
             (hereinafter referred to as "<span class="bold">Company</span>" which 
             expression shall, unless repugnant to the context or meaning thereof, be 
             deemed to include, its representatives and permitted assigns) <span class="small-caps bold">of the 
@@ -240,7 +240,7 @@
         </div>
 
         <div class="party-reference">
-            <span class="italic">ABC Corporation</span> and <span class="bold">COMPANY</span> shall hereinafter be referred to as such or 
+            <span class="italic"><%= Party1?.PartyName || 'ABC Corporation' %></span> and <span class="bold">COMPANY</span> shall hereinafter be referred to as such or 
             collectively as "<span class="bold">Parties</span>" and individually as "<span class="bold">Party</span>".
         </div>
     </div>
@@ -249,7 +249,7 @@
         <div class="whereas-title">
             <span class="bold">WHEREAS</span> both the Parties herein wish to pursue discussions and 
             negotiate with each other for the purpose of entering into a potential 
-            business arrangement in relation to <span class="bold">software development and technology consulting services</span> ("<span class="bold">Proposed Transaction</span>");
+            business arrangement in relation to <span class="bold"><%= proposedtransaction || 'software development and technology consulting services' %></span> ("<span class="bold">Proposed Transaction</span>");
         </div>
 
         <div class="whereas-clause">
@@ -434,10 +434,10 @@
         
         <div style="margin-left: 40px; margin-top: 10px;">
             <div style="margin-bottom: 8px;">
-                i. <span class="bold">Two (2)</span> years after the termination of the binding agreement
+                i. <span class="bold"><%= BindingAgreement?.TerminationYear || 'Two (2)' %></span> years after the termination of the binding agreement
             </div>
             <div style="margin-bottom: 8px;">
-                ii. <span class="bold">Three (3)</span> years after the expiry of the binding agreement
+                ii. <span class="bold"><%= BindingAgreement?.ExpiryYears || 'Three (3)' %></span> years after the expiry of the binding agreement
             </div>
             <div style="margin-bottom: 8px;">
                 (whichever is earlier)
@@ -471,7 +471,7 @@
         be on a principal-to-principal basis and nothing in this agreement shall 
         be deemed to have created a relationship of an agent or partner between 
         the Parties and none of the employees of COMPANY shall be considered as 
-        employees of <span class="bold">ABC Corporation</span>.
+        employees of <span class="bold"><%= Party1?.PartyName || 'ABC Corporation' %></span>.
     </div>
 
     <div class="clause">
@@ -508,28 +508,28 @@
 
         <table class="signature-table">
             <tr>
-                <td class="signature-header">ABC Corporation</td>
-                <td class="signature-header">XYZ Technologies Private Limited</td>
+                <td class="signature-header"><%= Party1?.PartyName || 'ABC Corporation' %></td>
+                <td class="signature-header"><%= Party2?.Party2Name || 'XYZ Technologies Private Limited' %></td>
             </tr>
             <tr>
                 <td>
                     <div class="signature-info">
                         <div><strong>Signature</strong></div>
                         <div class="signature-field"></div>
-                        <div>Name: <span class="bold">John Smith</span></div>
-                        <div>Designation: <span class="bold">Chief Executive Officer</span></div>
-                        <div>Place: <span class="bold">Mumbai</span></div>
-                        <div>Date: <span class="bold">July 9, 2025</span></div>
+                        <div>Name: <span class="bold"><%= PartySignature?.PartySignatory1Name || 'John Smith' %></span></div>
+                        <div>Designation: <span class="bold"><%= PartySignature?.PartySignatoryDesignation || 'Chief Executive Officer' %></span></div>
+                        <div>Place: <span class="bold"><%= PartySignature?.PartySignatoryPlace || 'Mumbai' %></span></div>
+                        <div>Date: <span class="bold"><%= PartySignature?.PartySignatureDate || 'July 9, 2025' %></span></div>
                     </div>
                 </td>
                 <td>
                     <div class="signature-info">
                         <div><strong>Signature</strong></div>
                         <div class="signature-field"></div>
-                        <div>Name: <span class="bold">Priya Sharma</span></div>
-                        <div>Designation: <span class="bold">Managing Director</span></div>
-                        <div>Place: <span class="bold">Bangalore</span></div>
-                        <div>Date: <span class="bold">July 9, 2025</span></div>
+                        <div>Name: <span class="bold"><%= Party2Signature?.Party2Signatory1Name || 'Priya Sharma' %></span></div>
+                        <div>Designation: <span class="bold"><%= Party2Signature?.Party2SignatoryDesignation || 'Managing Director' %></span></div>
+                        <div>Place: <span class="bold"><%= Party2Signature?.Party2SignatoryPlace || 'Bangalore' %></span></div>
+                        <div>Date: <span class="bold"><%= Party2Signature?.Party2SignatureDate || 'July 9, 2025' %></span></div>
                     </div>
                 </td>
             </tr>
