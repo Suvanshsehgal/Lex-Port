@@ -9,27 +9,27 @@ import API from "../api";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // Added state
+  const [errorMessage, setErrorMessage] = useState(""); 
   const [successMessage,setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  setErrorMessage(""); 
+  setErrorMessage("");
   setSuccessMessage("");
   setIsLoading(true);
 
   try {
     const response = await API.post("/login", { email, password });
 
-    
+
     console.log("Login success:", response.data);
     setErrorMessage("");
-    setSuccessMessage(response.data.message); 
+    setSuccessMessage(response.data.message);
 
-    localStorage.setItem("token", response.data.data.token); 
-    localStorage.setItem("user", JSON.stringify(response.data.data.user));  
+    localStorage.setItem("token", response.data.data.token);
+    localStorage.setItem("user", JSON.stringify(response.data.data.user));
     console.log("Token stored:", response.data.data.token);
 
      setTimeout(() => {
@@ -58,7 +58,7 @@ function Login() {
   };
 
   return (
-    
+
     <>
     {isLoading && (
   <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50">
@@ -116,7 +116,8 @@ function Login() {
           </div>
 
           {/* Right side - Login form */}
-          <div className="flex-1 max-w-sm w-full">
+          {/* ADDED mb-8 (for mobile margin) and lg:mb-0 (to remove on large screens) */}
+          <div className="flex-1 max-w-sm w-full mb-8 lg:mb-0">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/20">
               <h3 className="text-2xl font-bold text-white text-center mb-8">
                 LOGIN
