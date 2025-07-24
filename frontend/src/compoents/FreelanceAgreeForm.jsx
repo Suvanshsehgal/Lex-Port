@@ -136,17 +136,17 @@ export default function FreelanceAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Client Information</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Company Name:</label>
-                <input type="text" onChange={(e) => handleChange(e, "Client.CompanyName")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Company Name:</label>
+                <input type="text" onChange={(e) => handleChange(e, "Client.CompanyName")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Address:</label>
-                <input type="text" onChange={(e) => handleChange(e, "Client.RegisteredAddress")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Address:</label>
+                <input type="text" onChange={(e) => handleChange(e, "Client.RegisteredAddress")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Signatory Name:</label>
-                <input type="text" onChange={(e) => handleChange(e, "Client.SignatoryName")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Signatory Name:</label>
+                <input type="text" onChange={(e) => handleChange(e, "Client.SignatoryName")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
             </ul>
           </div>
@@ -155,17 +155,17 @@ export default function FreelanceAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Freelancer Information</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Company Name:</label>
-                <input type="text" onChange={(e) => handleChange(e, "Freelancer.CompanyName")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Company Name:</label>
+                <input type="text" onChange={(e) => handleChange(e, "Freelancer.CompanyName")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Address:</label>
-                <input type="text" onChange={(e) => handleChange(e, "Freelancer.RegisteredAddress")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Address:</label>
+                <input type="text" onChange={(e) => handleChange(e, "Freelancer.RegisteredAddress")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Signatory Name:</label>
-                <input type="text" onChange={(e) => handleChange(e, "Freelancer.SignatoryName")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Signatory Name:</label>
+                <input type="text" onChange={(e) => handleChange(e, "Freelancer.SignatoryName")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
             </ul>
           </div>
@@ -174,13 +174,13 @@ export default function FreelanceAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8 col-span-full">
             <h2 className="text-xl font-semibold mb-4">Project & Contract</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Assignment Details:</label>
-                <input type="text" onChange={(e) => handleChange(e, "AssignmentDetails")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Assignment Details:</label>
+                <input type="text" onChange={(e) => handleChange(e, "AssignmentDetails")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Start Date:</label>
-                <input type="date" onChange={(e) => handleChange(e, "ContractPeriod.StartDate")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Start Date:</label>
+                <input type="date" onChange={(e) => handleChange(e, "ContractPeriod.StartDate")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
             </ul>
           </div>
@@ -189,9 +189,9 @@ export default function FreelanceAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8 col-span-full">
             <h2 className="text-xl font-semibold mb-4">Compensation</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">Amount (₹):</label>
-                <input type="number" onChange={(e) => handleChange(e, "Compensation.AmountNumeric")} className="flex-1 border border-gray-300 rounded px-4 py-2" />
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="font-medium text-gray-700 mb-1 md:mb-0">Amount (₹):</label>
+                <input type="number" onChange={(e) => handleChange(e, "Compensation.AmountNumeric")} className="flex-1 border border-gray-300 rounded px-4 py-2 w-full" />
               </li>
             </ul>
           </div>

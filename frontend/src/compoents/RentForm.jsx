@@ -176,34 +176,34 @@ export default function RentAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Landlord Information</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Full Name:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Landlord.FullName")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Father's Name:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Landlord.FathersName")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Address:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Landlord.Address")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
             </ul>
@@ -213,44 +213,44 @@ export default function RentAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Tenant Information</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Tenant Name:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Tenant.Name")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Father Name:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Tenant.FatherName")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Working:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Tenant.Working")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Registered Address:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "Tenant.RegisteredAddress")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
             </ul>
@@ -260,8 +260,8 @@ export default function RentAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Property Details</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Property Number:
                 </label>
                 <input
@@ -269,11 +269,11 @@ export default function RentAgreementForm() {
                   onChange={(e) =>
                     handleChange(e, "PropertyDetails.PropertyNumber")
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Rooms Included:
                 </label>
                 <input
@@ -281,11 +281,11 @@ export default function RentAgreementForm() {
                   onChange={(e) =>
                     handleChange(e, "PropertyDetails.NumberofBedrooms")
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Number of fans:
                 </label>
                 <input
@@ -293,11 +293,11 @@ export default function RentAgreementForm() {
                   onChange={(e) =>
                     handleChange(e, "PropertyDetails.Inventory.NumberofFans")
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   CFL Lights:
                 </label>
                 <input
@@ -308,7 +308,7 @@ export default function RentAgreementForm() {
                       "PropertyDetails.Inventory.NumberofCFLLIGHTS"
                     )
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
             </ul>
@@ -318,18 +318,18 @@ export default function RentAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Rent Details</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Monthly Rent:
                 </label>
                 <input
                   type="number"
                   onChange={(e) => handleChange(e, "RentDetails.MonthlyRent")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Maintanance Charge:
                 </label>
                 <input
@@ -337,11 +337,11 @@ export default function RentAgreementForm() {
                   onChange={(e) =>
                     handleChange(e, "RentDetails.MaintenanceCharge")
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   SecurityDeposit:
                 </label>
                 <input
@@ -349,7 +349,7 @@ export default function RentAgreementForm() {
                   onChange={(e) =>
                     handleChange(e, "RentDetails.SecurityDeposit")
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
             </ul>
@@ -359,14 +359,14 @@ export default function RentAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-xl font-semibold mb-4">Lease Terms</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Lease Start Date:
                 </label>
                 <input
                   type="date"
                   onChange={(e) => handleChange(e, "LeaseTerms.LeaseStartDate")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
             </ul>
@@ -376,18 +376,18 @@ export default function RentAgreementForm() {
           <div className="bg-white p-6 rounded-lg shadow-md mb-8 col-span-full">
             <h2 className="text-xl font-semibold mb-4">Signature Section</h2>
             <ul>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Signed At:
                 </label>
                 <input
                   type="text"
                   onChange={(e) => handleChange(e, "SignatureSection.SignedAt")}
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
-              <li className="flex items-center gap-4 mb-4">
-                <label className="w-40 font-medium text-gray-700">
+              <li className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="mb-1 md:mb:0 font-medium text-gray-700">
                   Signed Date:
                 </label>
                 <input
@@ -395,7 +395,7 @@ export default function RentAgreementForm() {
                   onChange={(e) =>
                     handleChange(e, "SignatureSection.SignedDate")
                   }
-                  className="flex-1 border border-gray-300 rounded px-4 py-2"
+                  className="flex-1 border border-gray-300 rounded px-4 py-2 w-full"
                 />
               </li>
             </ul>

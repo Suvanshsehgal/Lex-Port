@@ -142,8 +142,8 @@ export default function NdaAgreementForm() {
           {/* Party 1 */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Party 1 Information</h2>
-            <div className="flex items-center mb-4">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Party Name
               </label>
               <input
@@ -153,8 +153,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Party Address
               </label>
               <input
@@ -169,8 +169,8 @@ export default function NdaAgreementForm() {
           {/* Party 2 */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Party 2 Information</h2>
-            <div className="flex items-center mb-4">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Party 2 Name
               </label>
               <input
@@ -180,8 +180,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Party 2 Address
               </label>
               <input
@@ -198,8 +198,8 @@ export default function NdaAgreementForm() {
             <h2 className="text-xl font-semibold mb-4">
               Transaction & Agreement
             </h2>
-            <div className="flex items-center mb-4">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Proposed Transaction
               </label>
               <input
@@ -210,8 +210,8 @@ export default function NdaAgreementForm() {
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-center">
-                <label className="w-40 font-medium text-gray-700">
+              <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="md-1 md:mb-0 font-medium text-gray-700">
                   Termination Year
                 </label>
                 <input
@@ -223,8 +223,8 @@ export default function NdaAgreementForm() {
                   required
                 />
               </div>
-              <div className="flex items-center">
-                <label className="w-40 font-medium text-gray-700">
+              <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+                <label className="md-1 md:mb-0 font-medium text-gray-700">
                   Expiry Years
                 </label>
                 <input
@@ -242,8 +242,8 @@ export default function NdaAgreementForm() {
           {/* Party 1 Signature */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Party 1 Signature</h2>
-            <div className="flex items-center mb-3">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Signatory Name
               </label>
               <input
@@ -255,8 +255,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center mb-3">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Designation
               </label>
               <input
@@ -268,8 +268,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center mb-3">
-              <label className="w-40 font-medium text-gray-700">Place</label>
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">Place</label>
               <input
                 type="text"
                 onChange={(e) =>
@@ -279,8 +279,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Signature Date
               </label>
               <input
@@ -297,8 +297,8 @@ export default function NdaAgreementForm() {
           {/* Party 2 Signature */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Party 2 Signature</h2>
-            <div className="flex items-center mb-3">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Signatory Name
               </label>
               <input
@@ -310,8 +310,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center mb-3">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Designation
               </label>
               <input
@@ -323,8 +323,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center mb-3">
-              <label className="w-40 font-medium text-gray-700">Place</label>
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">Place</label>
               <input
                 type="text"
                 onChange={(e) =>
@@ -334,8 +334,8 @@ export default function NdaAgreementForm() {
                 required
               />
             </div>
-            <div className="flex items-center">
-              <label className="w-40 font-medium text-gray-700">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-4">
+              <label className="md-1 md:mb-0 font-medium text-gray-700">
                 Signature Date
               </label>
               <input
