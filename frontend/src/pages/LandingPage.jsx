@@ -1,8 +1,17 @@
-import React from "react";
+import React ,{useState} from "react";
 import landingimage from "../assets/LandingPagePhoto.png";
 import NavbarLanding from '../compoents/NavbarLanding'
 
 const LegalLandingPage = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
   return (
     <>
     <NavbarLanding/>
@@ -37,13 +46,13 @@ const LegalLandingPage = () => {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <button
-               
+               onClick={handleButtonClick}
                 className="bg-[#1e463c] text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-200"
               >
                 Generate a Document
               </button>
               <button
-               
+               onClick={handleButtonClick}
                 className="border-2 border-[#1e463c] text-[#1e463c] px-8 py-3 rounded-lg font-semibold hover:bg-[#1e463c] hover:text-white transition duration-200"
               >
                 Get AI Assistance
@@ -64,6 +73,33 @@ const LegalLandingPage = () => {
         </div>
       </div>
     </div>
+    {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white p-8 rounded-lg shadow-2xl text-center relative max-w-sm mx-auto"
+               style={{ backgroundColor: "#FAF9F6", color: "#1e463c" }}>
+            <button
+              onClick={closePopup}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+              aria-label="Close popup"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold mb-4">Login or Register</h2>
+            <p className="text-lg">
+              Please log in or register to access this feature.
+            </p>
+            {/* You can add actual login/register buttons here later */}
+            <div className="mt-6 flex justify-center gap-4">
+              <button
+                onClick={closePopup}
+                className="bg-[#1e463c] text-white px-6 py-2 rounded-md font-semibold hover:opacity-90 transition duration-200"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
