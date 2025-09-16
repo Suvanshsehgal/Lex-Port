@@ -10,7 +10,7 @@ const History = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://lex-port.onrender.com/api/v1/user/history",
+        "https://lex-port.onrender.com/api/v1/history",
         {
           headers: {
             Authorization: `Bearer ${token}`,
