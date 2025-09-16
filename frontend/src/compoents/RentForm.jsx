@@ -103,10 +103,13 @@ export default function RentAgreementForm() {
 
     try {
       const response = await API.post(
-        "https://lex-port.onrender.com/api/v1/user/documents",
+        "documents",
         form,
         {
-          responseType: "blob", // PDF as blob
+          responseType: "blob", // PDF as blob,
+          headers: {
+            // Let Axios set the Content-Type automatically for FormData
+          }
         }
       );
       const blobUrl = window.URL.createObjectURL(new Blob([response.data]));

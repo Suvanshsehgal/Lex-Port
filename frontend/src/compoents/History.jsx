@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 
 const History = () => {
   const [documents, setDocuments] = useState([]);
@@ -9,14 +9,7 @@ const History = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(
-        "https://lex-port.onrender.com/api/v1/history",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await API.get("documents/history");
 
       setDocuments(response.data.data);
       setLoading(false);

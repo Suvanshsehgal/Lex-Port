@@ -82,7 +82,10 @@ export default function PartnershipAgreementForm() {
     flatten(formData);
 
     try {
-      const response = await API.post("https://lex-port.onrender.com/api/v1/user/documents", form, { responseType: "blob" });
+      const response = await API.post("documents", form, { 
+        responseType: "blob",
+        headers: {} // Let Axios set the correct Content-Type for FormData
+      });
       const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
       setPdfUrl(blobUrl);
       setShowDownloadBtn(true);

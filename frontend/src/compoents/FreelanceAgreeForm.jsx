@@ -81,9 +81,12 @@ export default function FreelanceAgreementForm() {
 
     try {
       const response = await API.post(
-        "https://lex-port.onrender.com/api/v1/user/documents",
+        "documents",
         form,
-        { responseType: "blob" }
+        { 
+          responseType: "blob",
+          headers: {} // Let Axios set the correct Content-Type for FormData
+        }
       );
       const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
       setPdfUrl(blobUrl);
