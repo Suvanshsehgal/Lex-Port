@@ -1,9 +1,11 @@
 import express from "express";
 import axios from "axios";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = express.Router();
 
-// Ideally use dotenv for this:
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
 router.post("/", async (req, res) => {
@@ -15,13 +17,13 @@ router.post("/", async (req, res) => {
     const groqResponse = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "llama3-8b-8192", // or 'llama3-70b-8192'
+        model: "llama-3.1-8b-instant",
         messages: [
           {
             role: "system",
             content: `You are a legal expert chatbot. Only answer questions that are strictly related to law, legal advice, regulations, rights, or judiciary matters. 
-                   If a question is unrelated to law, respond with:
-                  "I'm sorry, I can only assist with legal-related queries."`,
+                      If a question is unrelated to law, respond with:
+                      "I'm sorry, I can only assist with legal-related queries."`,
           },
           {
             role: "user",
@@ -42,7 +44,7 @@ router.post("/", async (req, res) => {
       .json({ response: groqResponse.data.choices[0].message.content });
   } catch (err) {
     console.error("Groq error:", err.response?.data || err.message);
-    res.status(500).json({ error: "Failed to connect to Groq API" });
+    res.status(500).json({ error: err.response?.data || err.message });
   }
 });
 
