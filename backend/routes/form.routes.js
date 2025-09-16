@@ -5,7 +5,7 @@ import protect from "../middlewares/auth.middleware.js";
 import { getUserHistory } from "../controllers/form.controller.js";
 const router = express.Router();
 
-router.post("/documents",protect ,upload.single("SignatureImage"), submitDocument); 
+router.post("/",protect ,upload.single("SignatureImage"), submitDocument); 
 router.get("/history", protect, getUserHistory);
 
 export default router;
