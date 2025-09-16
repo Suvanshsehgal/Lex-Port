@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Star } from 'lucide-react';
+import ConsultForm from './ConsultForm';
 
 const LawyerCard = ({ lawyer }) => {
+  const [showConsultForm, setShowConsultForm] = useState(false);
+
   return (
 
     <div className="relative w-full h-[400px] mx-auto rounded-lg overflow-hidden shadow-lg">
@@ -45,11 +48,20 @@ const LawyerCard = ({ lawyer }) => {
 
         {/* Action Buttons */}
         <div className="absolute bottom-6 left-6 right-6">
-          <button className="w-full border-2 border-white text-white font-semibold py-3 px-4 rounded-lg hover:bg-white hover:text-green-800 transition-colors duration-200">
+          <button 
+            onClick={() => setShowConsultForm(true)}
+            className="w-full border-2 border-white text-white font-semibold py-3 px-4 rounded-lg hover:bg-white hover:text-green-800 transition-colors duration-200"
+          >
             Book Consultancy
           </button>
         </div>
       </div>
+      {showConsultForm && (
+        <ConsultForm 
+          lawyer={lawyer} 
+          onClose={() => setShowConsultForm(false)} 
+        />
+      )}
     </div>
   );
 };

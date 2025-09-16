@@ -4,7 +4,7 @@ class ApiError extends Error {
     message = 'Internal Server Error',
     error = [],
     stack = '',
-    code = 'INTERNAL_SERVER_ERROR' // ✅ Added: error code
+    code = 'INTERNAL_SERVER_ERROR'
   ) {
     super(message);
     this.statusCode = statusCode;

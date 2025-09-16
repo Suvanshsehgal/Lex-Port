@@ -21,7 +21,7 @@ function Login() {
   setIsLoading(true);
 
   try {
-    const response = await API.post("/login", { email, password });
+    const response = await API.post("/user/login", { email, password });
 
 
     console.log("Login success:", response.data);

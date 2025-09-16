@@ -3,14 +3,15 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import chatRoutes from './routes/chatbot.routes.js'
 import cors from 'cors';
-import  submitDocument  from './routes/form.routes.js';
+import submitDocument from './routes/form.routes.js';
+import consultationRoutes from './routes/consultation.routes.js';
 import bodyParser from 'body-parser';
 import errorMiddleware from './middlewares/error.middleware.js';
 dotenv.config();
 
 const app = express();
 
-const allowedOrigins = ['https://lex-port.vercel.app', 'http://localhost:5173'];
+const allowedOrigins = ['https://lex-port.vercel.app', 'http://localhost:5173', 'http://localhost:5174'];
 
 app.use(cors({
   origin: allowedOrigins,
@@ -26,9 +27,13 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
     res.send("Started Lex-port server");
 });
+// Auth and user routes
 app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/user/chat",chatRoutes);
-app.use("/api/v1/user",submitDocument);
+
+// Other routes
+app.use("/api/v1/chat", chatRoutes);
+app.use("/api/v1/documents", submitDocument);
+app.use("/api/v1/consultation", consultationRoutes);
 
 app.use(errorMiddleware);
 export { app };
