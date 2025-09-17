@@ -173,22 +173,7 @@ function Login() {
                 </button>
 
                 {/* Divider */}
-                <div className="flex items-center my-6">
-                  <div className="flex-grow border-t border-white/30"></div>
-                  <span className="mx-4 text-white/60 text-sm font-medium">
-                    or
-                  </span>
-                  <div className="flex-grow border-t border-white/30"></div>
-                </div>
-
-                {/* Google Sign In button */}
-                <button
-                  onClick={handleGoogleSignIn}
-                  className="w-full py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all duration-200 border border-white/30 backdrop-blur-sm flex items-center justify-center gap-3"
-                >
-                  <img src={GoogleLogo} alt="Google Logo" className="w-5 h-5" />
-                  Sign In with Google
-                </button>
+                
               </div>
             </div>
           </div>

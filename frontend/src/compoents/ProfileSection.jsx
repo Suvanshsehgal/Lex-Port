@@ -12,14 +12,7 @@ function ProfileSection() {
   return (
     <>
     <div className="bg-[#FAF9F6] py-8 px-4 md:px-12 flex flex-col md:flex-row items-center gap-6 border-b border-gray-200">
-      {/* Profile Image */}
-      <div className="flex-shrink-0">
-        <img
-          src="https://randomuser.me/api/portraits/men/75.jpg"
-          alt="User"
-          className="w-24 h-24 rounded-full border-4 border-white shadow-md object-cover"
-        />
-      </div>
+    
 
       {/* User Info */}
       <div className="flex-1 text-center md:text-left">
